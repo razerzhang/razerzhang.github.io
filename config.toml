@@ -1,0 +1,13 @@
+baseURL = "https://runzhezhang.github.io/"
+languageCode = "zh-cn"
+title = "Runzhe Zhang - 个人博客"
+enableRobotsTXT = true
+defaultContentLanguage = "zh-cn"
+
+[pagination]
+  pagerSize = 10
+
+[params]
+  author = "Runzhe Zhang"
+  description = "记录技术探索与生活思考的个人博客"
+  github = "https://github.com/razerzhang"

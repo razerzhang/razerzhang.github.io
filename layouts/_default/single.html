@@ -1,0 +1,28 @@
+{{ define "header" }}
+  <header>
+    {{ partial "nav.html" . }}
+    <div class="post-hero">
+      <p class="post-meta">
+        <span><i class="fa-regular fa-calendar"></i> {{ .Date.Format "2006 年 1 月 2 日" }}</span>
+        <span><i class="fa-regular fa-clock"></i> 阅读约 {{ .ReadingTime }} 分钟</span>
+        {{ with .Params.tags }}
+          <span><i class="fa-solid fa-tags"></i> {{ delimit . " / " }}</span>
+        {{ end }}
+      </p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.summary }}
+        <p>{{ . }}</p>
+      {{ else }}
+        {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
+      {{ end }}
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <article class="content-wrapper">
+    <section>
+      {{ .Content }}
+    </section>
+  </article>
+{{ end }}

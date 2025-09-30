@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Runzhe Zhang - 个人博客</title>
+    <link>https://runzhezhang.github.io/</link>
+    <description>Recent content on Runzhe Zhang - 个人博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Feb 2025 09:00:00 +0800</lastBuildDate>
+    <atom:link href="https://runzhezhang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>构建个人技术成长体系</title>
+      <link>https://runzhezhang.github.io/posts/growth-journey/</link>
+      <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/posts/growth-journey/</guid>
+      <description>给自己制定 2025 年的成长框架：让学习、实践与输出形成闭环。</description>
+    </item>
+  </channel>
+</rss>

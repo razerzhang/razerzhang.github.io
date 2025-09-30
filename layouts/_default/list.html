@@ -1,0 +1,41 @@
+{{ define "header" }}
+  <header>
+    {{ partial "nav.html" . }}
+    <div class="post-hero">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}
+        <p>{{ . }}</p>
+      {{ else }}
+        <p>浏览我最近整理的文章，发现新的思考与灵感。</p>
+      {{ end }}
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <section class="section-wrapper">
+    <div class="container mx-auto px4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap6">
+        {{ range .Pages }}
+          <article class="feature-card">
+            <h3 class="text-xl font-semibold mb2">
+              <a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a>
+            </h3>
+            <p class="section-description" style="margin: 0 0 1.25rem; text-align: left;">
+              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}
+            </p>
+            <p class="mid-gray" style="margin-bottom: 0.75rem;">
+              <i class="fa-regular fa-calendar"></i> {{ .Date.Format "2006 年 1 月 2 日" }} ·
+              <i class="fa-regular fa-clock"></i> {{ .ReadingTime }} 分钟
+            </p>
+            {{ with .Params.tags }}
+              <p class="mid-gray" style="margin-bottom: 0;">标签：{{ delimit . " / " }}</p>
+            {{ end }}
+          </article>
+        {{ else }}
+          <p>暂时没有内容。</p>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

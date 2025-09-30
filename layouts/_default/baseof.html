@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}zh-CN{{ end }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
+    {{ with .Params.description }}<meta name="description" content="{{ . }}">{{ else }}{{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}{{ end }}
+    <meta name="generator" content="Hugo {{ hugo.Version }}">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="{{ "/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" | relURL }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+
+    {{ block "extra_head" . }}{{ end }}
+  </head>
+  <body class="ma0 avenir bg-near-white production">
+    {{ block "header" . }}
+      <header>
+        {{ partial "nav.html" . }}
+      </header>
+    {{ end }}
+
+    <main role="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ block "footer" . }}
+      <footer>
+        <div class="footer-inner">
+          <span>&copy; {{ now.Format "2006" }} {{ .Site.Params.author }}. 保留所有权利。</span>
+          <div class="footer-socials">
+            <a href="{{ with .Site.Params.github }}{{ . }}{{ else }}#{{ end }}" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+      </footer>
+    {{ end }}
+  </body>
+</html>

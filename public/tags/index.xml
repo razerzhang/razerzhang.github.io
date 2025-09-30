@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Runzhe Zhang - 个人博客</title>
+    <link>https://runzhezhang.github.io/tags/</link>
+    <description>Recent content in Tags on Runzhe Zhang - 个人博客</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 16 Feb 2025 09:00:00 +0800</lastBuildDate>
+    <atom:link href="https://runzhezhang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>成长</title>
+      <link>https://runzhezhang.github.io/tags/%E6%88%90%E9%95%BF/</link>
+      <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/tags/%E6%88%90%E9%95%BF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>方法论</title>
+      <link>https://runzhezhang.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>效率</title>
+      <link>https://runzhezhang.github.io/tags/%E6%95%88%E7%8E%87/</link>
+      <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/tags/%E6%95%88%E7%8E%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>学习</title>
+      <link>https://runzhezhang.github.io/tags/%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/tags/%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
