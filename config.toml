@@ -3,6 +3,7 @@ languageCode = "zh-cn"
 title = "Runzhe Zhang - 个人博客"
 enableRobotsTXT = true
 defaultContentLanguage = "zh-cn"
+publishDir = "docs"
 
 [pagination]
   pagerSize = 10
