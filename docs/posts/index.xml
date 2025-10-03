@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>博客 on Runzhe Zhang - 个人博客</title>
-    <link>https://runzhezhang.github.io/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in 博客 on Runzhe Zhang - 个人博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 03 Oct 2025 18:19:25 +0800</lastBuildDate>
-    <atom:link href="https://runzhezhang.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>三年半工作总结</title>
-      <link>https://runzhezhang.github.io/posts/three-year-summary/</link>
+      <link>http://localhost:1313/posts/three-year-summary/</link>
       <pubDate>Fri, 03 Oct 2025 18:19:25 +0800</pubDate>
-      <guid>https://runzhezhang.github.io/posts/three-year-summary/</guid>
+      <guid>http://localhost:1313/posts/three-year-summary/</guid>
       <description>对世界好奇，初心会带你去该去的地方——在XX的三年半</description>
     </item>
     <item>
       <title>构建个人技术成长体系</title>
-      <link>https://runzhezhang.github.io/posts/growth-journey/</link>
+      <link>http://localhost:1313/posts/growth-journey/</link>
       <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
-      <guid>https://runzhezhang.github.io/posts/growth-journey/</guid>
+      <guid>http://localhost:1313/posts/growth-journey/</guid>
       <description>给自己制定 2025 年的成长框架：让学习、实践与输出形成闭环。</description>
     </item>
   </channel>
