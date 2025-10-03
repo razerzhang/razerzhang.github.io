@@ -2,16 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://runzhezhang.github.io/</loc>
+    <lastmod>2025-10-03T18:19:25+08:00</lastmod>
+  </url><url>
+    <loc>https://runzhezhang.github.io/posts/</loc>
+    <lastmod>2025-10-03T18:19:25+08:00</lastmod>
+  </url><url>
+    <loc>https://runzhezhang.github.io/posts/three-year-summary/</loc>
+    <lastmod>2025-10-03T18:19:25+08:00</lastmod>
+  </url><url>
     <loc>https://runzhezhang.github.io/categories/</loc>
     <lastmod>2025-02-16T09:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://runzhezhang.github.io/</loc>
-    <lastmod>2025-02-16T09:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://runzhezhang.github.io/tags/</loc>
-    <lastmod>2025-02-16T09:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://runzhezhang.github.io/posts/</loc>
     <lastmod>2025-02-16T09:00:00+08:00</lastmod>
   </url><url>
     <loc>https://runzhezhang.github.io/tags/%E6%88%90%E9%95%BF/</loc>
