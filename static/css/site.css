@@ -1,10 +1,10 @@
 :root {
-  --primary-color: #2563eb;
-  --primary-dark: #1d4ed8;
-  --accent-color: #16a34a;
-  --text-color: #1f2933;
-  --muted-text-color: #52606d;
-  --section-bg: #f5f7fa;
+  --primary-color: #eaecf0;
+  --primary-dark: #e5e6e8;
+  --accent-color: #e9f0ec;
+  --text-color: #000000;
+  --muted-text-color: #333333;
+  --section-bg: #ffffff;
   --card-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
   --card-shadow-hover: 0 20px 35px rgba(15, 23, 42, 0.12);
   --transition-speed: 0.3s;
@@ -13,23 +13,44 @@
 body {
   color: var(--text-color);
   font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 35%, #eef2ff 100%);
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 header {
-  background: linear-gradient(120deg, rgba(30, 64, 175, 0.95), rgba(76, 29, 149, 0.9));
-  box-shadow: var(--card-shadow);
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+header .light-silver {
+  color: var(--text-color) !important;
 }
 
 nav a {
   font-weight: 500;
   letter-spacing: 0.02em;
+  color: var(--text-color);
 }
 
 nav a:hover {
-  color: #ffffff;
+  color: var(--primary-color);
+}
+
+.nav-brand {
+  font-weight: 600;
+  transition: color var(--transition-speed) ease;
+}
+
+.nav-brand:hover {
+  color: var(--primary-color);
+}
+
+.nav-link {
+  transition: color var(--transition-speed) ease;
 }
 
 .profile-image {
@@ -74,19 +95,19 @@ nav a:hover {
 }
 
 .social-link {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 1.5rem;
   transition: transform var(--transition-speed) ease,
     color var(--transition-speed) ease;
 }
 
 .social-link:hover {
-  color: #ffffff;
+  color: var(--primary-color);
   transform: translateY(-3px);
 }
 
 .hero-subtitle {
-  color: rgba(226, 232, 240, 0.85);
+  color: var(--text-color);
 }
 
 .section-wrapper {
@@ -116,31 +137,35 @@ nav a:hover {
 
 .cta-button {
   display: inline-block;
-  background: var(--primary-color);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-weight: 600;
   padding: 0.75rem 1.75rem;
+  border: 2px solid #000000;
   border-radius: 999px;
   transition: background var(--transition-speed) ease,
     transform var(--transition-speed) ease;
-  box-shadow: 0 12px 22px rgba(37, 99, 235, 0.25);
+  box-shadow: none;
 }
 
 .cta-button:hover {
-  background: var(--primary-dark);
+  background: #000000;
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
 .link-accent {
-  color: var(--primary-color);
+  color: #000000;
   font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  text-decoration: none;
 }
 
 .link-accent:hover {
-  color: var(--primary-dark);
+  color: #333333;
+  text-decoration: underline;
 }
 
 .post-hero {
@@ -148,13 +173,18 @@ nav a:hover {
   margin: 0 auto;
   padding: 4rem 1.5rem 2rem;
   text-align: center;
-  color: rgba(255, 255, 255, 0.92);
+  color: #000000;
 }
 
 .post-hero h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
+1  color: #000000 !important;
+}
+
+.post-hero p {
+  color: #000000 !important;
 }
 
 .post-meta {
@@ -163,6 +193,7 @@ nav a:hover {
   gap: 1.5rem;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
+  color: #333333;
 }
 
 .content-wrapper {
@@ -269,4 +300,17 @@ footer .footer-socials a:hover {
   .content-wrapper h2 {
     font-size: 1.5rem;
   }
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--text-color);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
 }

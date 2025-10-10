@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>方法论 on Runzhe Zhang - 个人博客</title>
-    <link>http://localhost:62680/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+    <link>https://runzhezhang.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
     <description>Recent content in 方法论 on Runzhe Zhang - 个人博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 16 Feb 2025 09:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:62680/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://runzhezhang.github.io/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>构建个人技术成长体系</title>
-      <link>http://localhost:62680/posts/growth-journey/</link>
+      <link>https://runzhezhang.github.io/posts/growth-journey/</link>
       <pubDate>Sun, 16 Feb 2025 09:00:00 +0800</pubDate>
-      <guid>http://localhost:62680/posts/growth-journey/</guid>
+      <guid>https://runzhezhang.github.io/posts/growth-journey/</guid>
       <description>给自己制定 2025 年的成长框架：让学习、实践与输出形成闭环。</description>
     </item>
   </channel>
