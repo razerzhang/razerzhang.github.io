@@ -11,13 +11,13 @@
       <p class="hero-subtitle f4 mb4">研究如何利用Agentic AI提升效率和情绪价值</p>
       <div class="social-links">
         <a href="https://github.com/razerzhang" class="social-link" aria-label="GitHub">
-          <i class="fab fa-github"></i>
+          {{ partial "icons/github.html" . }}
         </a>
         <a href="https://www.linkedin.com/in/runzhe-zhang-350427321/" class="social-link" aria-label="LinkedIn">
-          <i class="fab fa-linkedin"></i>
+          {{ partial "icons/linkedin.html" . }}
         </a>
         <a href="#" class="social-link" aria-label="X">
-          <i class="fab fa-x-twitter"></i>
+          {{ partial "icons/x-twitter.html" . }}
         </a>
       </div>
     </div>
@@ -29,7 +29,7 @@
     <div class="container mx-auto px4">
       <h2 class="section-title">最新文章</h2>
       <p class="section-description">持续记录我的思考与实践，欢迎阅读最新的内容更新。</p>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap6" style="max-width: 1200px; margin: 0 auto 2rem;">
         {{ range first 4 (where .Site.RegularPages "Type" "posts") }}
           <article class="feature-card">
@@ -40,8 +40,8 @@
               {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 120 }}{{ end }}
             </p>
             <p class="mid-gray" style="margin-bottom: 0.75rem;">
-              <i class="fa-regular fa-calendar"></i> {{ .Date.Format "2006 年 1 月 2 日" }} ·
-              <i class="fa-regular fa-clock"></i> {{ .ReadingTime }} 分钟
+              {{ partial "icons/calendar.html" . }} {{ .Date.Format "2006 年 1 月 2 日" }} ·
+              {{ partial "icons/clock.html" . }} {{ .ReadingTime }} 分钟
             </p>
             {{ with .Params.tags }}
               <p class="mid-gray" style="margin-bottom: 0;">标签：{{ delimit . " / " }}</p>
