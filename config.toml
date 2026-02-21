@@ -21,8 +21,8 @@ publishDir = "docs"
   github = "https://github.com/razerzhang"
 
   [params.giscus]
-    enabled = false
+    enabled = true
     repo = "razerzhang/razerzhang.github.io"
-    repoId = ""
+    repoId = "R_kgDOMJr-ZQ"
     category = "Announcements"
-    categoryId = ""
+    categoryId = "DIC_kwDOMJr-Zc4C26ly"
