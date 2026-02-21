@@ -1,0 +1,24 @@
+{{ define "extra_head" }}
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+{{ end }}
+
+{{ define "header" }}
+  <header>
+    {{ partial "nav.html" . }}
+    <div class="post-hero">
+      <h1>搜索</h1>
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <div class="content-wrapper">
+    <div id="search"></div>
+  </div>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      new PagefindUI({ element: "#search", showSubResults: true });
+    });
+  </script>
+{{ end }}

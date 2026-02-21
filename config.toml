@@ -8,7 +8,21 @@ publishDir = "docs"
 [pagination]
   pagerSize = 10
 
+[markup]
+  [markup.highlight]
+    style = "github"
+    lineNos = false
+    guessSyntax = true
+    noClasses = true
+
 [params]
   author = "Runzhe Zhang"
   description = "记录技术探索与生活思考的个人博客"
   github = "https://github.com/razerzhang"
+
+  [params.giscus]
+    enabled = false
+    repo = "razerzhang/razerzhang.github.io"
+    repoId = ""
+    category = "Announcements"
+    categoryId = ""

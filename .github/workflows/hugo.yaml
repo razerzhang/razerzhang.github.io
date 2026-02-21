@@ -31,6 +31,9 @@ jobs:
       - name: Build site
         run: hugo --minify
 
+      - name: Index with Pagefind
+        run: npx pagefind --site docs
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
