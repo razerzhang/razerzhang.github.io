@@ -25,8 +25,8 @@
               {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}
             </p>
             <p class="mid-gray" style="margin-bottom: 0.75rem;">
-              <i class="fa-regular fa-calendar"></i> {{ .Date.Format "2006 年 1 月 2 日" }} ·
-              <i class="fa-regular fa-clock"></i> {{ .ReadingTime }} 分钟
+              {{ partial "icons/calendar.html" . }} {{ .Date.Format "2006 年 1 月 2 日" }} ·
+              {{ partial "icons/clock.html" . }} {{ .ReadingTime }} 分钟
             </p>
             {{ with .Params.tags }}
               <p class="mid-gray" style="margin-bottom: 0;">标签：{{ delimit . " / " }}</p>
