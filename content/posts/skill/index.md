@@ -2,6 +2,7 @@
 title: "Skill 不是外挂，而是 Agent 的组织方式"
 date: 2026-03-26T21:25:28+06:00
 draft: true
+tags: ["AI"]
 ---
 
 Skill 这件事最近在企业里很热。很多团队都在说，业务流程可以被拆成一个个 Skill，Agent 之所以开始“能干活”，也是因为有了 Skill。
