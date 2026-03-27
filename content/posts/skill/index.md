@@ -1,7 +1,7 @@
 ---
 title: "Skill 不是外挂，而是 Agent 的组织方式"
 date: 2026-03-26T21:25:28+06:00
-draft: true
+draft: false
 tags: ["AI"]
 ---
 
