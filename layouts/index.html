@@ -1,71 +1,125 @@
 {{ define "header" }}
+  {{ $posts := first 4 ((where .Site.RegularPages "Type" "posts").ByDate.Reverse) }}
   <header>
     {{ partial "nav.html" . }}
-    <div class="tc-l pv3 ph3 ph4-ns">
-      <img src="{{ "images/gohugo-default-sample-hero-image.jpg" | relURL }}" alt="{{ .Site.Params.author }}" class="profile-image mx-auto">
-      <h1 class="hero-author-name">
-        {{ .Site.Params.author }}
-      </h1>
-      <p class="hero-badge">关于我</p>
-      <p class="hero-subtitle f4 mb4">我是 Runzhe，目前在世界 500 强外企担任SWE</p>
-      <p class="hero-subtitle f4 mb4">A Builder, currently focus on AI Agent</p>
-      <div class="social-links">
-        <a href="https://github.com/razerzhang" class="social-link" aria-label="GitHub">
-          {{ partial "icons/github.html" . }}
-        </a>
-        <a href="https://www.linkedin.com/in/runzhe-zhang-350427321/" class="social-link" aria-label="LinkedIn">
-          {{ partial "icons/linkedin.html" . }}
-        </a>
-        <a href="#" class="social-link" aria-label="X">
-          {{ partial "icons/x-twitter.html" . }}
-        </a>
+    <section class="home-hero">
+      <div class="site-shell hero-grid">
+        <div class="hero-copy">
+          <p class="hero-kicker">SWE / AI Agent / Writing</p>
+          <h1 class="hero-author-name">{{ .Site.Params.author }}</h1>
+          <p class="hero-intro">Build AI agents, systems, and long-term thinking into real products.</p>
+          <p class="hero-subtitle">写技术、写成长，也持续记录我如何把想法变成真正可运行的系统。</p>
+          <div class="hero-actions">
+            <a href="#latest-posts" class="cta-button cta-button-primary">阅读文章</a>
+            <a href="#contact" class="cta-button">联系我</a>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/razerzhang" class="social-link" aria-label="GitHub">
+              {{ partial "icons/github.html" . }}
+            </a>
+            <a href="https://www.linkedin.com/in/runzhe-zhang-350427321/" class="social-link" aria-label="LinkedIn">
+              {{ partial "icons/linkedin.html" . }}
+            </a>
+            <a href="#" class="social-link" aria-label="X">
+              {{ partial "icons/x-twitter.html" . }}
+            </a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-portrait-frame">
+            <img src="{{ "images/gohugo-default-sample-hero-image.jpg" | relURL }}" alt="{{ .Site.Params.author }}" class="hero-portrait">
+          </div>
+          {{ if gt (len $posts) 0 }}
+            {{ $featured := index $posts 0 }}
+            <div class="hero-note">
+              <span class="hero-note-label">Latest writing</span>
+              <a href="{{ $featured.RelPermalink }}" class="hero-note-link">{{ $featured.Title }}</a>
+            </div>
+          {{ end }}
+        </div>
       </div>
-    </div>
+    </section>
+    <section class="proof-strip">
+      <div class="site-shell proof-grid">
+        <div class="proof-intro">
+          <p class="section-eyebrow">Current focus</p>
+          <h2>围绕 Agent、系统设计和长期成长，持续做能真正落地的东西。</h2>
+        </div>
+        <div class="proof-list">
+          <div class="proof-item">
+            <span class="proof-index">01</span>
+            <p>在企业环境里推动 AI Agent 与低代码平台，从 idea 到可用产品。</p>
+          </div>
+          <div class="proof-item">
+            <span class="proof-index">02</span>
+            <p>写关于 Skill、上下文工程、技术决策和个人成长的长期文章。</p>
+          </div>
+          <div class="proof-item">
+            <span class="proof-index">03</span>
+            <p>关注“如何找到正确问题”，而不只是更快地完成已有任务。</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </header>
 {{ end }}
 
 {{ define "main" }}
-  <section id="latest-posts" class="section-wrapper">
-    <div class="container mx-auto px4">
-      <h2 class="section-title">最新文章</h2>
-      <p class="section-description">持续记录我的思考与实践，欢迎阅读最新的内容更新。</p>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap6" style="max-width: 1200px; margin: 0 auto 2rem;">
-        {{ range first 4 (where .Site.RegularPages "Type" "posts") }}
-          <article class="feature-card">
-            <h3 class="text-xl font-semibold mb2">
-              <a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a>
-            </h3>
-            <p class="section-description" style="margin: 0 0 1.25rem; text-align: left;">
-              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 120 }}{{ end }}
-            </p>
-            <p class="mid-gray" style="margin-bottom: 0.75rem;">
-              {{ partial "icons/calendar.html" . }} {{ .Date.Format "2006 年 1 月 2 日" }} ·
-              {{ partial "icons/clock.html" . }} {{ .ReadingTime }} 分钟
-            </p>
-            {{ with .Params.tags }}
-              <p class="mid-gray" style="margin-bottom: 0;">标签：{{ delimit . " / " }}</p>
-            {{ end }}
-          </article>
-        {{ end }}
+  {{ $posts := first 4 ((where .Site.RegularPages "Type" "posts").ByDate.Reverse) }}
+  <section id="latest-posts" class="section-wrapper section-posts">
+    <div class="site-shell">
+      <div class="section-heading">
+        <p class="section-eyebrow">Latest posts</p>
+        <h2 class="section-title">最近写的内容</h2>
+        <p class="section-description">以技术、Agent、成长和方法论为主，保持稳定更新。</p>
       </div>
 
-      <div class="flex justify-center">
-        <a href="{{ relLangURL "posts/" }}" class="cta-button">
-          浏览所有文章
-        </a>
+      {{ if gt (len $posts) 0 }}
+        <div class="editorial-posts">
+          {{ $featured := index $posts 0 }}
+          <article class="featured-post">
+            <p class="post-kicker">Featured</p>
+            <h3><a href="{{ $featured.RelPermalink }}" class="link-accent">{{ $featured.Title }}</a></h3>
+            <p class="featured-summary">{{ with $featured.Params.summary }}{{ . }}{{ else }}{{ $featured.Summary | plainify | truncate 180 }}{{ end }}</p>
+            <p class="post-meta-line">
+              <span>{{ partial "icons/calendar.html" $featured }} {{ $featured.Date.Format "2006 年 1 月 2 日" }}</span>
+              <span>{{ partial "icons/clock.html" $featured }} {{ $featured.ReadingTime }} 分钟</span>
+            </p>
+          </article>
+
+          <div class="post-list-compact">
+            {{ range after 1 $posts }}
+              <article class="post-row">
+                <div class="post-row-main">
+                  <p class="post-kicker">Essay</p>
+                  <h3><a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a></h3>
+                  <p>{{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 110 }}{{ end }}</p>
+                </div>
+                <p class="post-row-meta">
+                  <span>{{ .Date.Format "2006.01.02" }}</span>
+                  <span>{{ .ReadingTime }} min</span>
+                </p>
+              </article>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+
+      <div class="section-actions">
+        <a href="{{ relLangURL "posts/" }}" class="cta-button">浏览所有文章</a>
       </div>
     </div>
   </section>
 
   <section id="contact" class="section-wrapper">
-    <div class="container mx-auto px4">
-      <h2 class="section-title">联系我</h2>
-      <p class="section-description">如果你有任何问题或合作意向，欢迎随时联系我，我们一起创造有价值的事情。</p>
-      <div class="flex justify-center">
-        <a href="mailto:razerzhang1@gmail.com" class="cta-button" style="background: var(--accent-color); box-shadow: 0 12px 22px rgba(22, 163, 74, 0.25);">
-          发送邮件
-        </a>
+    <div class="site-shell contact-panel">
+      <div class="contact-copy">
+        <p class="section-eyebrow">Contact</p>
+        <h2 class="section-title">如果你想聊 AI、产品落地、技术协作，欢迎来信。</h2>
+        <p class="section-description">适合一起交流的话题包括 Agent 产品、工程效率、技术管理，以及长期成长中的具体问题。</p>
+      </div>
+      <div class="contact-actions">
+        <a href="mailto:razerzhang1@gmail.com" class="cta-button cta-button-primary">发送邮件</a>
       </div>
     </div>
   </section>
