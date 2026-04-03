@@ -6,19 +6,15 @@
   <header>
     {{ partial "nav.html" . }}
     <div class="post-hero">
-      <p class="section-eyebrow">Search</p>
       <h1>搜索</h1>
-      <p>支持检索文章标题、正文和标签，适合快速回看某个主题或关键词。</p>
     </div>
   </header>
 {{ end }}
 
 {{ define "main" }}
-  <section class="search-shell">
-    <div class="content-wrapper search-layout">
-      <div id="search"></div>
-    </div>
-  </section>
+  <div class="content-wrapper">
+    <div id="search"></div>
+  </div>
   <script src="/pagefind/pagefind-ui.js"></script>
   <script>
     window.addEventListener("DOMContentLoaded", function () {

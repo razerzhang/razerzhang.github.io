@@ -2,7 +2,6 @@
   <header>
     {{ partial "nav.html" . }}
     <div class="post-hero">
-      <p class="section-eyebrow">Essay</p>
       <p class="post-meta">
         <span>{{ partial "icons/calendar.html" . }} {{ .Date.Format "2006 年 1 月 2 日" }}</span>
         <span>{{ partial "icons/clock.html" . }} 阅读约 {{ .ReadingTime }} 分钟</span>
@@ -21,7 +20,7 @@
 {{ end }}
 
 {{ define "main" }}
-  <article class="content-wrapper reading-layout">
+  <article class="content-wrapper">
     <section>
       {{ .Content }}
     </section>
