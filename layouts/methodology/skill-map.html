@@ -1,0 +1,276 @@
+{{ define "header" }}
+  <header>
+    {{ partial "nav.html" . }}
+    <section class="framework-hero">
+      <div class="framework-hero-inner">
+        <div class="framework-hero-copy">
+          <p class="framework-brand">Method Map</p>
+          <h1>{{ .Title }}</h1>
+          {{ with .Params.description }}
+            <p class="framework-hero-description">{{ . }}</p>
+          {{ end }}
+        </div>
+        <div class="framework-hero-quote">
+          <blockquote>{{ .Params.quote }}</blockquote>
+          <p>{{ .Params.quote_author }}</p>
+        </div>
+      </div>
+    </section>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  {{ $detailPage := site.GetPage "page" "methodology/framework-detail.md" }}
+  {{ $detailPath := "" }}
+  {{ with $detailPage }}
+    {{ $detailPath = .RelPermalink }}
+  {{ end }}
+  <section class="framework-toolbar">
+    <div class="framework-toolbar-inner">
+      <div class="framework-filter-list">
+        {{ range .Params.categories }}
+          <button
+            class="framework-filter{{ if eq .id "all" }} is-active{{ end }}"
+            type="button"
+            data-filter="{{ .id }}"
+          >
+            {{ .name }}
+          </button>
+        {{ end }}
+      </div>
+      <div class="framework-toolbar-meta">
+        <span>{{ len .Params.frameworks }} 个框架</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-canvas-section">
+    <div class="framework-canvas-shell">
+      <div class="framework-canvas-label framework-canvas-label-top-left">高杠杆 · 早期</div>
+      <div class="framework-canvas-label framework-canvas-label-top-right">高杠杆 · 后期</div>
+      <div class="framework-canvas-label framework-canvas-label-bottom-left">低杠杆 · 早期</div>
+      <div class="framework-canvas-label framework-canvas-label-bottom-right">低杠杆 · 后期</div>
+
+      <div class="framework-axis framework-axis-y-top">↑ 高杠杆</div>
+      <div class="framework-axis framework-axis-y-bottom">低杠杆 ↓</div>
+      <div class="framework-axis framework-axis-x-left">需求发现</div>
+      <div class="framework-axis framework-axis-x-right">交付复盘</div>
+
+      <div class="framework-grid-lines"></div>
+
+      {{ range .Params.frameworks }}
+        <button
+          class="framework-point category-{{ .category }}"
+          type="button"
+          data-framework-target="{{ .index }}"
+          data-category="{{ .category }}"
+          data-title="{{ .title }}"
+          data-summary="{{ .summary }}"
+          data-category-name="{{ .category_name }}"
+          data-index="{{ .index }}"
+          data-proposer="{{ .proposer }}"
+          data-suitable-for="{{ .suitable_for }}"
+          data-era="{{ .era }}"
+          data-reference="{{ .reference }}"
+          data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
+          style="left: {{ .x }}%; top: {{ .y }}%;"
+          aria-label="{{ .title }}"
+        >
+          <span class="framework-point-tooltip">{{ .title }}</span>
+        </button>
+      {{ end }}
+
+      <div class="framework-popup" id="framework-popup" hidden>
+        <button class="framework-popup-close" type="button" aria-label="关闭">×</button>
+        <p class="framework-popup-index" id="framework-popup-index"></p>
+        <div class="framework-popup-top">
+          <span class="framework-popup-tag" id="framework-popup-tag"></span>
+        </div>
+        <h2 id="framework-popup-title"></h2>
+        <p class="framework-popup-summary" id="framework-popup-summary"></p>
+        <div class="framework-popup-meta">
+          <div class="framework-popup-meta-item">
+            <p class="framework-popup-meta-label">提出者</p>
+            <p class="framework-popup-meta-value" id="framework-popup-proposer"></p>
+          </div>
+          <div class="framework-popup-meta-item">
+            <p class="framework-popup-meta-label">适合场景</p>
+            <p class="framework-popup-meta-value" id="framework-popup-suitable"></p>
+          </div>
+          <div class="framework-popup-meta-item">
+            <p class="framework-popup-meta-label">年代</p>
+            <p class="framework-popup-meta-value" id="framework-popup-era"></p>
+          </div>
+          <div class="framework-popup-meta-item">
+            <p class="framework-popup-meta-label">引用资料</p>
+            <p class="framework-popup-meta-value" id="framework-popup-reference"></p>
+          </div>
+        </div>
+        <p class="framework-popup-action">
+          <a class="framework-popup-link" id="framework-popup-link" href="#">查看详情</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-card-section">
+    <div class="framework-card-grid">
+      {{ range .Params.frameworks }}
+        <article
+          class="framework-card"
+          id="framework-{{ .index }}"
+          data-framework-card="{{ .index }}"
+          data-category="{{ .category }}"
+          data-title="{{ .title }}"
+          data-summary="{{ .summary }}"
+          data-category-name="{{ .category_name }}"
+          data-index="{{ .index }}"
+          data-proposer="{{ .proposer }}"
+          data-suitable-for="{{ .suitable_for }}"
+          data-era="{{ .era }}"
+          data-reference="{{ .reference }}"
+          data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
+          tabindex="0"
+        >
+          <div class="framework-card-top">
+            <p class="framework-card-index"># {{ .index }}</p>
+            <span class="framework-card-tag category-{{ .category }}">{{ .category_name }}</span>
+          </div>
+          <h2>{{ .title }}</h2>
+          <p>{{ .summary }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const filters = Array.from(document.querySelectorAll("[data-filter]"));
+      const cards = Array.from(document.querySelectorAll("[data-framework-card]"));
+      const points = Array.from(document.querySelectorAll("[data-framework-target]"));
+      const popup = document.getElementById("framework-popup");
+      const popupIndex = document.getElementById("framework-popup-index");
+      const popupTag = document.getElementById("framework-popup-tag");
+      const popupTitle = document.getElementById("framework-popup-title");
+      const popupSummary = document.getElementById("framework-popup-summary");
+      const popupProposer = document.getElementById("framework-popup-proposer");
+      const popupSuitable = document.getElementById("framework-popup-suitable");
+      const popupEra = document.getElementById("framework-popup-era");
+      const popupReference = document.getElementById("framework-popup-reference");
+      const popupLink = document.getElementById("framework-popup-link");
+      const popupClose = document.querySelector(".framework-popup-close");
+      let activeFramework = null;
+
+      function openPopup(source) {
+        if (!popup || !source) return;
+
+        activeFramework = source.dataset.index;
+        popupIndex.textContent = "# " + source.dataset.index;
+        popupTag.textContent = source.dataset.categoryName;
+        popupTag.className = "framework-popup-tag category-" + source.dataset.category;
+        popupTitle.textContent = source.dataset.title;
+        popupSummary.textContent = source.dataset.summary;
+        popupProposer.textContent = source.dataset.proposer || "";
+        popupSuitable.textContent = source.dataset.suitableFor || "";
+        popupEra.textContent = source.dataset.era || "";
+        popupReference.textContent = source.dataset.reference || "";
+        if (popupLink) {
+          popupLink.href = source.dataset.detailUrl || "#";
+        }
+        popup.hidden = false;
+
+        points.forEach(function (point) {
+          point.classList.toggle("is-active", point.dataset.index === activeFramework);
+        });
+
+        cards.forEach(function (card) {
+          card.classList.toggle("is-focused", card.dataset.index === activeFramework);
+        });
+      }
+
+      function closePopup() {
+        activeFramework = null;
+        if (popup) {
+          popup.hidden = true;
+        }
+
+        points.forEach(function (point) {
+          point.classList.remove("is-active");
+        });
+
+        cards.forEach(function (card) {
+          card.classList.remove("is-focused");
+        });
+      }
+
+      function setFilter(filter) {
+        filters.forEach(function (button) {
+          button.classList.toggle("is-active", button.dataset.filter === filter);
+        });
+
+        cards.forEach(function (card) {
+          const visible = filter === "all" || card.dataset.category === filter;
+          card.classList.toggle("is-hidden", !visible);
+        });
+
+        points.forEach(function (point) {
+          const visible = filter === "all" || point.dataset.category === filter;
+          point.classList.toggle("is-hidden", !visible);
+        });
+
+        if (activeFramework) {
+          const activeStillVisible = filter === "all" || points.some(function (point) {
+            return point.dataset.index === activeFramework && point.dataset.category === filter;
+          });
+
+          if (!activeStillVisible) {
+            closePopup();
+          }
+        }
+      }
+
+      filters.forEach(function (button) {
+        button.addEventListener("click", function () {
+          setFilter(button.dataset.filter);
+        });
+      });
+
+      points.forEach(function (point) {
+        point.addEventListener("click", function () {
+          openPopup(point);
+        });
+      });
+
+      cards.forEach(function (card) {
+        card.addEventListener("click", function () {
+          const targetUrl = card.dataset.detailUrl;
+          if (targetUrl) {
+            window.location.href = targetUrl;
+          }
+        });
+
+        card.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            const targetUrl = card.dataset.detailUrl;
+            if (targetUrl) {
+              window.location.href = targetUrl;
+            }
+          }
+        });
+      });
+
+      if (popupClose) {
+        popupClose.addEventListener("click", function () {
+          closePopup();
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closePopup();
+        }
+      });
+    });
+  </script>
+{{ end }}

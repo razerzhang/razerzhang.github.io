@@ -1,0 +1,617 @@
+{{ define "header" }}
+  {{ $mapPage := site.GetPage "page" "methodology/skill-framework-map.md" }}
+  <header class="framework-detail-header">
+    <div class="framework-detail-header-inner">
+      <a href="{{ $mapPage.RelPermalink }}" class="framework-detail-back">← 返回框架地图</a>
+      <a href="{{ "/" | relURL }}" class="framework-detail-wordmark">Razer Zhang</a>
+      <span class="framework-detail-badge" id="framework-detail-badge">#01 · 方法论</span>
+    </div>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  {{ $mapPage := site.GetPage "page" "methodology/skill-framework-map.md" }}
+  {{ $frameworks := $mapPage.Params.frameworks }}
+  {{ $categories := after 1 $mapPage.Params.categories }}
+  <script id="framework-detail-data" type="application/json">
+    {{ dict "frameworks" $frameworks "categories" $categories "mapLink" $mapPage.RelPermalink | jsonify }}
+  </script>
+
+  <section class="framework-detail-hero">
+    <div class="framework-detail-hero-inner">
+      <div class="framework-detail-copy">
+        <p class="framework-detail-kicker">Framework Deep Dive</p>
+        <h1 id="framework-detail-title">方法论详情</h1>
+        <p class="framework-detail-summary" id="framework-detail-summary">加载中…</p>
+        <div class="framework-detail-meta" id="framework-detail-meta"></div>
+      </div>
+      <div class="framework-detail-aside">
+        <div class="framework-detail-orbit">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">01</span>
+      <span class="framework-detail-section-label">它解决什么问题</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-problem-title"></h2>
+      <div class="framework-detail-problem-copy" id="framework-detail-problem-copy"></div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">02</span>
+      <span class="framework-detail-section-label">框架结构</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-structure-title"></h2>
+      <p class="framework-detail-section-intro" id="framework-detail-structure-intro"></p>
+      <div class="framework-detail-structure-strip" id="framework-detail-structure-strip"></div>
+      <div class="framework-detail-structure-grid" id="framework-detail-structure-grid"></div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">03</span>
+      <span class="framework-detail-section-label">适用场景</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-scenario-title"></h2>
+      <p class="framework-detail-section-intro" id="framework-detail-scenario-intro"></p>
+      <div class="framework-detail-scenario-grid" id="framework-detail-scenario-grid"></div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">04</span>
+      <span class="framework-detail-section-label">典型应用</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-example-title"></h2>
+      <div class="framework-detail-example-copy" id="framework-detail-example-copy"></div>
+      <div class="framework-detail-example-panel">
+        <div class="framework-detail-example-card">
+          <p class="framework-detail-example-kicker">常见输出</p>
+          <p class="framework-detail-example-value" id="framework-detail-example-output"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">05</span>
+      <span class="framework-detail-section-label">来源与历史</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-history-title"></h2>
+      <p class="framework-detail-section-intro" id="framework-detail-history-intro"></p>
+      <div class="framework-detail-timeline" id="framework-detail-timeline"></div>
+    </div>
+  </section>
+
+  <section class="framework-detail-section">
+    <div class="framework-detail-section-top">
+      <span class="framework-detail-section-index">06</span>
+      <span class="framework-detail-section-label">配合使用</span>
+    </div>
+    <div class="framework-detail-section-body">
+      <h2 id="framework-detail-related-title"></h2>
+      <p class="framework-detail-section-intro" id="framework-detail-related-intro"></p>
+      <div class="framework-detail-related-list" id="framework-detail-related-list"></div>
+    </div>
+  </section>
+
+  <section class="framework-detail-next">
+    <div class="framework-detail-next-inner">
+      <p class="framework-detail-next-label" id="framework-detail-next-label">继续阅读下一个</p>
+      <a href="#" class="framework-detail-next-card" id="framework-detail-next-link">
+        <span id="framework-detail-next-title">下一个框架</span>
+        <span class="framework-detail-next-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <noscript>
+    <section class="section-wrapper">
+      <div class="container mx-auto px4">
+        <p>这个详情页需要浏览器开启 JavaScript 才能显示具体框架内容。</p>
+      </div>
+    </section>
+  </noscript>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      const dataEl = document.getElementById("framework-detail-data");
+      if (!dataEl) return;
+
+      const dataset = JSON.parse(dataEl.textContent);
+      const frameworks = dataset.frameworks || [];
+      const categories = dataset.categories || [];
+      const categoryOrder = categories.map(function (item) { return item.id; });
+      const params = new URLSearchParams(window.location.search);
+      const requestedId = params.get("id");
+      const framework = frameworks.find(function (item) { return item.index === requestedId; }) || frameworks[0];
+      if (!framework) return;
+
+      const customStructures = {
+        "RICE": [
+          { short: "R", label: "Reach", description: "估算会影响多少用户，先确定这是一个多大范围的问题。" },
+          { short: "I", label: "Impact", description: "判断它对核心目标能带来多大改变量，不是只看想象中的价值。" },
+          { short: "C", label: "Confidence", description: "给出对数据和判断的信心，避免把拍脑袋结论包装成确定答案。" },
+          { short: "E", label: "Effort", description: "估算实现成本，用最少资源换取最大收益。" }
+        ],
+        "Kano 模型": [
+          { short: "M", label: "基本型", description: "没有它会强烈不满，但做了也不会显著惊喜。" },
+          { short: "P", label: "期望型", description: "做得越好，满意度越高，通常是用户能明显感知的核心能力。" },
+          { short: "A", label: "魅力型", description: "用户未必明确期待，但一旦出现会显著提升感受。" },
+          { short: "I", label: "无差异", description: "用户不在意，投入再多也难带来真正价值。" }
+        ],
+        "MoSCoW": [
+          { short: "M", label: "Must Have", description: "没有它版本就无法成立，是这次交付的底线。" },
+          { short: "S", label: "Should Have", description: "重要但可被替代，必要时可延后。" },
+          { short: "C", label: "Could Have", description: "锦上添花，在资源允许时补充体验。" },
+          { short: "W", label: "Won't Have", description: "明确这次不做，帮助团队守住边界。" }
+        ],
+        "C4 模型": [
+          { short: "C1", label: "上下文", description: "先交代系统和外部世界的关系，明确边界。" },
+          { short: "C2", label: "容器", description: "说明主要应用、服务和数据库的拆分方式。" },
+          { short: "C3", label: "组件", description: "往下看关键模块如何协作，避免只停留在大框架。" },
+          { short: "C4", label: "代码", description: "在需要时继续下钻到实现层，形成一致表达。" }
+        ],
+        "Scrum": [
+          { short: "角色", label: "角色", description: "产品负责人、Scrum Master 和开发团队各自承担不同责任。" },
+          { short: "Sprint", label: "节奏", description: "通过固定周期推进迭代，让交付有持续节拍。" },
+          { short: "仪式", label: "仪式", description: "计划、站会、评审、回顾帮助团队同步、校准、改进。" },
+          { short: "待办", label: "待办管理", description: "围绕产品待办列表持续澄清、拆解与排序。" }
+        ],
+        "OKR": [
+          { short: "O", label: "目标", description: "先写清楚想去哪里，目标要有方向感而不是任务列表。" },
+          { short: "KR", label: "关键结果", description: "用可以验证的结果判断目标是否真的被推进。" },
+          { short: "对齐", label: "对齐", description: "让团队看到彼此正在拉动什么，减少分散优化。" },
+          { short: "复盘", label: "复盘", description: "周期结束后回顾完成度与偏差来源，形成下一轮输入。" }
+        ]
+      };
+
+      const categoryNarratives = {
+        insight: {
+          problemTitle: "在真正做方案之前，先把用户看清楚",
+          problem: [
+            "很多团队在需求讨论里最容易犯的错，不是没有想法，而是过早进入方案。还没弄清楚用户是谁、处在什么情境里、为什么会犹豫，就已经开始争论功能细节。",
+            framework.title + " 的价值，在于把注意力重新拉回用户本身。它不是为了制造更多研究动作，而是帮助团队用更可靠的方式理解真实动机、阻力与触点。",
+            "当问题从“我们想做什么”切回“用户正在经历什么”，后续的定义、设计与优先级判断才会更稳。"
+          ],
+          structureTitle: "从观察用户到沉淀洞察",
+          structureIntro: "这类方法通常不是一次性结论，而是一组帮助团队逐步贴近真实需求的动作。",
+          scenariosTitle: "什么时候尤其值得用它？",
+          scenariosIntro: "当团队还没有统一的用户理解时，这类方法能显著降低后面走偏的概率。",
+          exampleTitle: "一个常见的应用方式",
+          historyTitle: "它为什么会被反复使用",
+          relatedTitle: "和这些工具搭配更顺"
+        },
+        definition: {
+          problemTitle: "把模糊诉求翻译成可讨论的问题",
+          problem: [
+            "需求评审里最危险的情况，是大家都在认真讨论，却讨论的不是同一个问题。目标、对象和边界没有被定义清楚时，方案越多反而越混乱。",
+            framework.title + " 的作用，是把“感觉要做”变成“为什么做、为谁做、先做什么”的结构化判断。",
+            "它帮助团队在进入设计之前先统一问题表述，从而避免后面花很大代价修正方向。"
+          ],
+          structureTitle: "先定义问题，再决定解法",
+          structureIntro: "这类方法的重点不是直接给答案，而是建立更清晰的问题框架。",
+          scenariosTitle: "什么时候该优先拿出来用？",
+          scenariosIntro: "当团队面对模糊输入、分歧较多或问题边界不清时，先用定义类方法会更稳。",
+          exampleTitle: "在产品讨论里的典型用法",
+          historyTitle: "它是如何进入产品工作流的",
+          relatedTitle: "常见的前后衔接工具"
+        },
+        design: {
+          problemTitle: "让方案不只是想法，而是有结构的设计",
+          problem: [
+            "有了问题定义之后，团队仍然会面临另一个挑战：如何把洞察稳定地翻译成方案，而不是停留在灵光一现的想法。",
+            framework.title + " 帮助团队组织信息、连接要素，并把抽象判断落到更可执行的设计表达上。",
+            "它的意义不在于让文档变复杂，而在于让方案之间的差异、权衡与边界更容易被看见。"
+          ],
+          structureTitle: "把思考过程外显出来",
+          structureIntro: "设计类方法的共同点，是让原本隐性的判断过程变成能协作的可视结构。",
+          scenariosTitle: "什么场景最适合它发挥作用？",
+          scenariosIntro: "当团队需要共同看全局、拆路径、或者对齐设计逻辑时，这类方法很有价值。",
+          exampleTitle: "从洞察到方案的过渡例子",
+          historyTitle: "为什么它会在产品与服务设计中流行",
+          relatedTitle: "常与这些方法串联使用"
+        },
+        priority: {
+          problemTitle: "在资源有限时做出更清醒的取舍",
+          problem: [
+            "大多数产品问题不是“有没有东西可做”，而是“什么现在就该做”。当所有需求都显得合理时，优先级判断往往会变成声音大小的竞争。",
+            framework.title + " 的意义，是给团队一个更透明的判断标准，让排序不再只靠经验和直觉。",
+            "它把取舍逻辑公开出来，让不同角色至少能围绕同一套框架讨论，而不是各说各话。"
+          ],
+          structureTitle: "建立一套可复述的排序逻辑",
+          structureIntro: "优先级方法的核心，不是追求绝对正确，而是把标准讲清楚、反复复用。",
+          scenariosTitle: "什么情况下最值得使用？",
+          scenariosIntro: "当 backlog 变长、资源变紧、分歧变多时，优先级方法能帮团队快速回到同一张桌子上。",
+          exampleTitle: "一个典型的排序场景",
+          historyTitle: "它为什么会成为团队常用工具",
+          relatedTitle: "前后通常会搭这些方法"
+        },
+        system_design: {
+          problemTitle: "让业务逻辑和系统结构对得上",
+          problem: [
+            "系统设计最常见的问题，不是技术选型本身，而是业务概念、系统边界和团队协作没有一起被讲清楚。",
+            framework.title + " 的价值，在于把“业务怎么运转”和“系统怎么拆解”放进同一套表达里，让设计决策更容易被理解、讨论和维护。",
+            "当系统复杂度开始上升时，清晰的结构方法论会比单点的工程技巧更重要。"
+          ],
+          structureTitle: "从业务抽象走向系统表达",
+          structureIntro: "这类方法帮助团队把概念、模块、边界和协作关系串成一套可持续的设计语言。",
+          scenariosTitle: "什么时候该切换到系统设计视角？",
+          scenariosIntro: "当需求已经不再是单点功能，而是开始牵涉复杂业务和架构演化时，这类方法就很关键。",
+          exampleTitle: "一个典型的架构讨论场景",
+          historyTitle: "它为什么在复杂系统里反复出现",
+          relatedTitle: "适合搭配的上下游方法"
+        },
+        validation: {
+          problemTitle: "在正式投入前，先验证方向是不是对的",
+          problem: [
+            "很多返工不是因为执行差，而是因为方向错。上线后才发现用户不理解、不需要，代价往往远高于提前验证。",
+            framework.title + " 的作用，是把验证提前到更低成本的阶段，让团队在真正投入开发前先看到风险。",
+            "它并不保证结果完美，但能帮助团队更早识别偏差，从而把试错成本控制在可接受范围内。"
+          ],
+          structureTitle: "通过反馈缩短判断回路",
+          structureIntro: "验证类方法的本质，是尽可能用真实反馈替代想象中的正确。",
+          scenariosTitle: "什么情况下最适合用它？",
+          scenariosIntro: "只要团队对方向仍有不确定性，先验证通常比直接投入更划算。",
+          exampleTitle: "一个典型的验证路径",
+          historyTitle: "它是如何成为现代产品默认动作的",
+          relatedTitle: "常和这些方法一起用"
+        },
+        delivery: {
+          problemTitle: "把想法真正推进成可交付的结果",
+          problem: [
+            "很多团队并不缺洞察和方案，真正困难的是如何把这些想法转成稳定的执行节奏、责任分工和交付结果。",
+            framework.title + " 提供了一套更清晰的推进方式，让复杂协作不至于在执行阶段失速。",
+            "它的价值不是增加流程，而是帮助团队在节奏、范围和责任上形成共同预期。"
+          ],
+          structureTitle: "从计划、协同到交付闭环",
+          structureIntro: "交付类方法的核心，是把模糊目标拆成团队能一起推进的节奏与产出。",
+          scenariosTitle: "什么情况下应该引入它？",
+          scenariosIntro: "当团队需要稳定推进复杂任务、管理节奏或协调多人协作时，这类方法会很有效。",
+          exampleTitle: "一个典型的交付协作案例",
+          historyTitle: "它为什么会成为执行层的经典工具",
+          relatedTitle: "常见的上下游搭配"
+        },
+        growth: {
+          problemTitle: "让交付结束成为下一轮优化的起点",
+          problem: [
+            "如果产品工作只停在上线，团队会很快失去积累。真正拉开差距的，往往是上线之后如何读结果、找偏差、做下一轮决策。",
+            framework.title + " 把注意力放在目标反馈和持续优化上，帮助团队建立更长期的视角。",
+            "它不是让复盘更正式，而是让经验可以被保留下来，并进入下一轮工作流。"
+          ],
+          structureTitle: "围绕结果做持续学习",
+          structureIntro: "增长与复盘类方法最重要的，是把结果重新送回决策链路中。",
+          scenariosTitle: "什么时候值得优先用它？",
+          scenariosIntro: "当团队已进入持续迭代和增长阶段，这类方法比单次交付视角更重要。",
+          exampleTitle: "一个典型的复盘与增长场景",
+          historyTitle: "它如何从实践中沉淀为框架",
+          relatedTitle: "常见的搭配组合"
+        },
+        system: {
+          problemTitle: "让多人协作建立在同一套目标和边界上",
+          problem: [
+            "当问题跨团队、跨系统、跨阶段时，最大的成本往往不是执行，而是没有共同的语言和边界。",
+            framework.title + " 帮助团队把目标、责任、依赖和风险摊开来谈，让协作建立在更清楚的框架上。",
+            "它的作用，是减少系统性工作中的模糊地带，让组织能围绕同一方向持续推进。"
+          ],
+          structureTitle: "把目标、角色与依赖连接起来",
+          structureIntro: "系统协同类方法强调的是全局视角，而不是只优化单个局部。",
+          scenariosTitle: "什么情况下会特别需要它？",
+          scenariosIntro: "当多个团队共同推进复杂目标时，没有系统级框架往往最容易失控。",
+          exampleTitle: "一个典型的跨团队协同场景",
+          historyTitle: "它为何成为组织协同中的经典方法",
+          relatedTitle: "适合搭配的工具组合"
+        }
+      };
+
+      const scenarioIcons = ["🧭", "🔎", "🧩", "⚙️", "📌", "🌱"];
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function splitSuitable(text) {
+        return String(text || "")
+          .split(/[、，,]/)
+          .map(function (item) { return item.trim(); })
+          .filter(Boolean);
+      }
+
+      function getCategoryConfig(category) {
+        return categoryNarratives[category] || categoryNarratives.definition;
+      }
+
+      function getStructure(framework) {
+        if (customStructures[framework.title]) {
+          return customStructures[framework.title];
+        }
+
+        if (framework.category === "insight") {
+          return [
+            { short: "看", label: "进入场景", description: "先回到真实使用情境，而不是从会议室里的假设开始。" },
+            { short: "听", label: "识别信号", description: "捕捉语言背后的目标、阻力和情绪变化。" },
+            { short: "理", label: "整理洞察", description: "把零散观察沉淀成团队可复用的用户理解。" }
+          ];
+        }
+
+        if (framework.category === "definition") {
+          return [
+            { short: "定", label: "界定问题", description: "先把讨论对象、边界和成功标准说清楚。" },
+            { short: "拆", label: "拆出关键", description: "分离表面诉求和真正核心问题，避免直接跳方案。" },
+            { short: "聚", label: "形成判断", description: "输出一个更可行动的问题表达，进入下一步设计。" }
+          ];
+        }
+
+        if (framework.category === "design") {
+          return [
+            { short: "连", label: "连接要素", description: "把用户目标、流程、触点或价值关系放到一张图里看。" },
+            { short: "显", label: "外显逻辑", description: "让方案形成结构，不只是停留在口头描述。" },
+            { short: "定", label: "支持决策", description: "帮助团队比较不同路径，并决定下一步推进方式。" }
+          ];
+        }
+
+        if (framework.category === "validation") {
+          return [
+            { short: "假", label: "提出假设", description: "明确此刻最值得验证的不确定性是什么。" },
+            { short: "试", label: "低成本验证", description: "尽量在投入较小的情况下收集真实反馈。" },
+            { short: "调", label: "根据结果调整", description: "把反馈转成方向校准，而不是只记录结论。" }
+          ];
+        }
+
+        if (framework.category === "growth") {
+          return [
+            { short: "看", label: "看结果", description: "先围绕目标表现读取结果，而不是只看动作完成没完成。" },
+            { short: "解", label: "解偏差", description: "找出偏差背后的原因和可控变量。" },
+            { short: "续", label: "进入下一轮", description: "把复盘结论沉淀成后续优化动作和指标跟踪。" }
+          ];
+        }
+
+        if (framework.category === "system") {
+          return [
+            { short: "齐", label: "统一目标", description: "先让所有参与者知道真正要对齐的方向是什么。" },
+            { short: "明", label: "看清依赖", description: "识别责任、边界和关键关系，避免后期失控。" },
+            { short: "控", label: "持续治理", description: "通过明确框架减少协作中的灰区和重复沟通。" }
+          ];
+        }
+
+        return [
+          { short: "识", label: "识别重点", description: "先明确这个方法要帮助团队看清什么。" },
+          { short: "判", label: "形成判断", description: "把讨论从感觉带回到更稳定的结构和标准。" },
+          { short: "出", label: "产出结果", description: "沉淀成可被下一步工作继续消费的输出物。" }
+        ];
+      }
+
+      function getScenarioCards(framework) {
+        const parts = splitSuitable(framework.suitable_for);
+        const base = parts.length ? parts : [framework.category_name + "相关工作"];
+        return base.slice(0, 6).map(function (item, index) {
+          return {
+            icon: scenarioIcons[index % scenarioIcons.length],
+            title: item,
+            description: "当团队正在处理“" + item + "”这一类问题时，" + framework.title + " 能帮助讨论更快回到结构化判断。"
+          };
+        });
+      }
+
+      function getExampleCopy(framework) {
+        const categoryText = framework.category_name;
+        return [
+          "一个典型做法，是先把当前问题放到“" + framework.title + "”的视角下重新梳理：团队不急着给方案，而是先确认目标、边界和判断标准。",
+          "接着，再用它去组织关键信息，让会议从零散观点转成有顺序的决策过程。对于 " + categoryText + " 相关的问题，这一步通常能显著降低来回返工。",
+          "最后，产出的不只是一个结论，而是一套能够被后续设计、开发或复盘继续使用的中间结果。"
+        ];
+      }
+
+      function getOutput(framework) {
+        const outputs = {
+          insight: "更清晰的用户洞察、关键触点和行为模式",
+          definition: "结构化的问题定义、目标用户与优先问题表述",
+          design: "更完整的方案结构、路径图或价值映射",
+          priority: "带判断依据的优先级顺序与取舍标准",
+          system_design: "更可沟通的架构边界、模块关系或建模结果",
+          validation: "真实反馈、可验证结论与下一步调整建议",
+          delivery: "更明确的节奏、责任分工和交付物安排",
+          growth: "可复用的复盘结论、指标判断和优化动作",
+          system: "更清晰的目标、依赖、责任关系和协作框架"
+        };
+        return outputs[framework.category] || "更清晰的判断标准与下一步动作";
+      }
+
+      function getTimeline(framework) {
+        return [
+          {
+            year: framework.era,
+            title: framework.title + " 被系统化使用",
+            body: framework.proposer + " 相关实践逐步让这个方法从经验技巧沉淀成可以复用的框架。"
+          },
+          {
+            year: "经典资料",
+            title: "核心参考被广泛引用",
+            body: framework.reference + " 让更多团队能用同一套语言来理解和应用这个方法。"
+          }
+        ];
+      }
+
+      function getRelated(framework) {
+        const currentCategoryIndex = categoryOrder.indexOf(framework.category);
+        const candidates = frameworks.filter(function (item) {
+          return item.index !== framework.index && (
+            item.category === framework.category ||
+            item.category === categoryOrder[currentCategoryIndex - 1] ||
+            item.category === categoryOrder[currentCategoryIndex + 1]
+          );
+        });
+
+        return candidates.slice(0, 3).map(function (item) {
+          const relation = item.category === framework.category
+            ? "同类方法：适合同一阶段横向比较使用"
+            : "上下游方法：适合串成一条完整工作链路";
+
+          return {
+            title: item.title,
+            description: relation,
+            href: "?id=" + encodeURIComponent(item.index)
+          };
+        });
+      }
+
+      function setHtml(id, html) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerHTML = html;
+        }
+      }
+
+      function setText(id, text) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = text;
+        }
+      }
+
+      const config = getCategoryConfig(framework.category);
+      const structure = getStructure(framework);
+      const scenarios = getScenarioCards(framework);
+      const timeline = getTimeline(framework);
+      const related = getRelated(framework);
+      const currentIndex = frameworks.findIndex(function (item) { return item.index === framework.index; });
+      const nextFramework = frameworks[(currentIndex + 1) % frameworks.length];
+
+      const accentMap = {
+        insight: ["#3c7258", "#edf7f1"],
+        definition: ["#476993", "#eef4fb"],
+        design: ["#8a662d", "#f7f0df"],
+        priority: ["#954b48", "#faefee"],
+        system_design: ["#496b89", "#eef4f8"],
+        validation: ["#685299", "#f1ecfb"],
+        delivery: ["#6c53a1", "#f1edfb"],
+        growth: ["#4d7a47", "#edf6ea"],
+        system: ["#7c496d", "#f7eef4"]
+      };
+      const accent = accentMap[framework.category] || accentMap.definition;
+      document.documentElement.style.setProperty("--framework-detail-accent", accent[0]);
+      document.documentElement.style.setProperty("--framework-detail-accent-soft", accent[1]);
+      document.documentElement.style.setProperty("--framework-detail-accent-line", accent[0] + "22");
+
+      document.title = framework.title + " | " + document.title;
+      setText("framework-detail-badge", "#" + framework.index + " · " + framework.category_name);
+      setText("framework-detail-title", framework.title);
+      setText("framework-detail-summary", framework.summary);
+
+      setHtml(
+        "framework-detail-meta",
+        [
+          { label: "提出者", value: framework.proposer },
+          { label: "类型", value: framework.category_name },
+          { label: "适合", value: framework.suitable_for },
+          { label: "年代", value: framework.era },
+          { label: "引用", value: framework.reference }
+        ].map(function (item) {
+          return '<div class="framework-detail-meta-item"><p class="framework-detail-meta-label">' +
+            escapeHtml(item.label) + '</p><p class="framework-detail-meta-value">' + escapeHtml(item.value) + '</p></div>';
+        }).join("")
+      );
+
+      setText("framework-detail-problem-title", config.problemTitle);
+      setHtml(
+        "framework-detail-problem-copy",
+        config.problem.map(function (paragraph) {
+          return "<p>" + escapeHtml(paragraph) + "</p>";
+        }).join("")
+      );
+
+      setText("framework-detail-structure-title", config.structureTitle);
+      setText("framework-detail-structure-intro", config.structureIntro);
+      setHtml(
+        "framework-detail-structure-strip",
+        structure.map(function (item) {
+          return '<div class="framework-detail-structure-strip-item"><strong>' + escapeHtml(item.short) +
+            '</strong><span>' + escapeHtml(item.label) + "</span></div>";
+        }).join("")
+      );
+      setHtml(
+        "framework-detail-structure-grid",
+        structure.map(function (item) {
+          return '<article class="framework-detail-structure-card"><p class="framework-detail-structure-short">' +
+            escapeHtml(item.short) + '</p><h3>' + escapeHtml(item.label) + '</h3><p>' + escapeHtml(item.description) + "</p></article>";
+        }).join("")
+      );
+
+      setText("framework-detail-scenario-title", config.scenariosTitle);
+      setText("framework-detail-scenario-intro", config.scenariosIntro);
+      setHtml(
+        "framework-detail-scenario-grid",
+        scenarios.map(function (item) {
+          return '<article class="framework-detail-scenario-card"><p class="framework-detail-scenario-icon">' +
+            escapeHtml(item.icon) + '</p><h3>' + escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.description) + "</p></article>";
+        }).join("")
+      );
+
+      setText("framework-detail-example-title", config.exampleTitle);
+      setHtml(
+        "framework-detail-example-copy",
+        getExampleCopy(framework).map(function (paragraph) {
+          return "<p>" + escapeHtml(paragraph) + "</p>";
+        }).join("")
+      );
+      setText("framework-detail-example-output", getOutput(framework));
+
+      setText("framework-detail-history-title", config.historyTitle);
+      setText("framework-detail-history-intro", framework.title + " 背后既有提出者、也有传播它的经典资料。理解它的来路，能帮助你判断这个方法适合用在什么深度和边界里。");
+      setHtml(
+        "framework-detail-timeline",
+        timeline.map(function (item) {
+          return '<div class="framework-detail-timeline-item"><div class="framework-detail-timeline-year">' +
+            escapeHtml(item.year) + '</div><div class="framework-detail-timeline-dot"></div><div class="framework-detail-timeline-content"><h3>' +
+            escapeHtml(item.title) + '</h3><p>' + escapeHtml(item.body) + "</p></div></div>";
+        }).join("")
+      );
+
+      setText("framework-detail-related-title", config.relatedTitle);
+      setText("framework-detail-related-intro", "如果想把它放进更完整的产品工作流里，通常会和这些方法形成前后衔接。");
+      setHtml(
+        "framework-detail-related-list",
+        related.map(function (item) {
+          return '<a class="framework-detail-related-item" href="' + escapeHtml(item.href) + '"><strong>' +
+            escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.description) + "</span></a>";
+        }).join("")
+      );
+
+      setText("framework-detail-next-label", "继续阅读下一个");
+      const nextLink = document.getElementById("framework-detail-next-link");
+      const nextTitle = document.getElementById("framework-detail-next-title");
+      if (nextLink && nextFramework) {
+        nextLink.href = "?id=" + encodeURIComponent(nextFramework.index);
+      }
+      if (nextTitle && nextFramework) {
+        nextTitle.textContent = nextFramework.title + " #" + nextFramework.index;
+      }
+    });
+  </script>
+{{ end }}

@@ -1,5 +1,6 @@
 [
   {{- $pages := where .Site.RegularPages "Type" "not in" (slice "search") -}}
+  {{- $pages = where $pages "Params.hidden" "ne" true -}}
   {{- range $index, $page := $pages -}}
     {{- if $index }},{{ end }}
     {

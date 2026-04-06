@@ -41,7 +41,7 @@
             <p>暂时没有内容。</p>
           {{ end }}
         {{ else }}
-          {{ range .Pages.ByWeight }}
+          {{ range where .Pages.ByWeight "Params.hidden" "ne" true }}
             <article class="directory-card">
               <div class="directory-card-top">
                 <p class="directory-card-kicker">{{ .CurrentSection.Title }}</p>
