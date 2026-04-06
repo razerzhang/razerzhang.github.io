@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="/css/site.css">
 
     
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-
   </head>
   <body class="ma0 avenir bg-white production">
     
@@ -40,6 +38,7 @@
 
     <div class="post-hero">
       <h1>搜索</h1>
+      <p>Search across posts, projects, and methods.</p>
     </div>
   </header>
 
@@ -47,12 +46,90 @@
     <main role="main">
       
   <div class="content-wrapper">
-    <div id="search"></div>
+    <div class="search-shell">
+      <label for="search-input" class="search-label">Search</label>
+      <input id="search-input" type="search" class="search-input" placeholder="Try: AI, career, writing..." autocomplete="off">
+      <p id="search-status" class="search-status">Type to search the site.</p>
+      <div id="search-results" class="search-results"></div>
+    </div>
   </div>
-  <script src="/pagefind/pagefind-ui.js"></script>
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      new PagefindUI({ element: "#search", showSubResults: true });
+      const input = document.getElementById("search-input");
+      const results = document.getElementById("search-results");
+      const status = document.getElementById("search-status");
+      let pages = [];
+
+      function escapeHtml(value) {
+        return value
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function renderItems(items) {
+        if (!items.length) {
+          results.innerHTML = "";
+          status.textContent = "No matching results.";
+          return;
+        }
+
+        results.innerHTML = items.map(function (item) {
+          const tags = Array.isArray(item.tags) && item.tags.length
+            ? '<div class="search-tags">' + item.tags.map(function (tag) {
+                return '<span>' + escapeHtml(tag) + '</span>';
+              }).join("") + "</div>"
+            : "";
+
+          return [
+            '<article class="search-result-card">',
+              '<p class="search-result-meta">' + escapeHtml(item.section || "page") + ' · ' + escapeHtml(item.date || "") + '</p>',
+              '<h2><a href="' + escapeHtml(item.permalink) + '">' + escapeHtml(item.title) + '</a></h2>',
+              '<p>' + escapeHtml(item.summary || "") + '</p>',
+              tags,
+            '</article>'
+          ].join("");
+        }).join("");
+      }
+
+      function runSearch(keyword) {
+        const query = keyword.trim().toLowerCase();
+
+        if (!query) {
+          results.innerHTML = "";
+          status.textContent = "Type to search the site.";
+          return;
+        }
+
+        const matched = pages.filter(function (page) {
+          const haystack = [
+            page.title,
+            page.summary,
+            page.content,
+            Array.isArray(page.tags) ? page.tags.join(" ") : "",
+            page.section
+          ].join(" ").toLowerCase();
+          return haystack.includes(query);
+        }).slice(0, 20);
+
+        status.textContent = matched.length + " result" + (matched.length === 1 ? "" : "s") + ".";
+        renderItems(matched);
+      }
+
+      fetch("/index.json")
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+          pages = data;
+          status.textContent = "Type to search the site.";
+          input.addEventListener("input", function (event) {
+            runSearch(event.target.value);
+          });
+        })
+        .catch(function () {
+          status.textContent = "Search index failed to load.";
+        });
     });
   </script>
 

@@ -85,7 +85,9 @@
       fetch("/index.json")
         .then(function (response) { return response.json(); })
         .then(function (data) {
-          pages = data;
+          pages = data.filter(function (page) {
+            return page.permalink.indexOf("/search/") === -1;
+          });
           status.textContent = "Type to search the site.";
           input.addEventListener("input", function (event) {
             runSearch(event.target.value);

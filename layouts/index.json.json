@@ -1,0 +1,15 @@
+[
+  {{- $pages := where .Site.RegularPages "Type" "not in" (slice "search") -}}
+  {{- range $index, $page := $pages -}}
+    {{- if $index }},{{ end }}
+    {
+      "title": {{ $page.Title | jsonify }},
+      "summary": {{ with $page.Params.summary }}{{ . | plainify | jsonify }}{{ else }}{{ $page.Summary | plainify | jsonify }}{{ end }},
+      "content": {{ $page.Plain | jsonify }},
+      "permalink": {{ $page.Permalink | jsonify }},
+      "section": {{ $page.Section | jsonify }},
+      "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+      "tags": {{ with $page.Params.tags }}{{ . | jsonify }}{{ else }}[]{{ end }}
+    }
+  {{- end -}}
+]
