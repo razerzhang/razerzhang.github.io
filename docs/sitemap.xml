@@ -2,10 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://runzhezhang.github.io/</loc>
+    <loc>https://runzhezhang.github.io/projects/career-insight/</loc>
+    <lastmod>2026-04-06T10:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://runzhezhang.github.io/methodology/writing-checklist/</loc>
     <lastmod>2026-04-06T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://runzhezhang.github.io/writing-checklist/</loc>
+    <loc>https://runzhezhang.github.io/</loc>
+    <lastmod>2026-04-06T10:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://runzhezhang.github.io/projects/</loc>
+    <lastmod>2026-04-06T10:30:00+08:00</lastmod>
+  </url><url>
+    <loc>https://runzhezhang.github.io/methodology/</loc>
     <lastmod>2026-04-06T10:00:00+08:00</lastmod>
   </url><url>
     <loc>https://runzhezhang.github.io/tags/ai/</loc>

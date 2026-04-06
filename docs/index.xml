@@ -6,14 +6,21 @@
     <description>Recent content on Runzhe Zhang - 个人博客</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Apr 2026 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 10:30:00 +0800</lastBuildDate>
     <atom:link href="https://runzhezhang.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>career-insight</title>
+      <link>https://runzhezhang.github.io/projects/career-insight/</link>
+      <pubDate>Mon, 06 Apr 2026 10:30:00 +0800</pubDate>
+      <guid>https://runzhezhang.github.io/projects/career-insight/</guid>
+      <description>把噪音很多、难比较的职业信息整理成更容易判断的机会地图，帮助用户更快看到值得投入的岗位。</description>
+    </item>
+    <item>
       <title>写作 Checklist</title>
-      <link>https://runzhezhang.github.io/writing-checklist/</link>
+      <link>https://runzhezhang.github.io/methodology/writing-checklist/</link>
       <pubDate>Mon, 06 Apr 2026 10:00:00 +0800</pubDate>
-      <guid>https://runzhezhang.github.io/writing-checklist/</guid>
-      <description>一份帮助我在动笔前、写作中和收尾时校正文稿的清单。</description>
+      <guid>https://runzhezhang.github.io/methodology/writing-checklist/</guid>
+      <description>适用于技术文章、思考随笔、项目复盘和源码阅读笔记的一份写作 checklist。</description>
     </item>
     <item>
       <title>源码阅读的关键：模式匹配</title>

@@ -1,39 +1,76 @@
 {{ define "header" }}
   <header>
     {{ partial "nav.html" . }}
-    <div class="post-hero">
-      <h1>{{ .Title }}</h1>
-      {{ with .Description }}
-        <p>{{ . }}</p>
-      {{ else }}
-        <p>浏览我最近整理的文章，发现新的思考与灵感。</p>
-      {{ end }}
-    </div>
+    <section class="list-hero">
+      <div class="list-hero-inner">
+        <p class="hero-badge">{{ .Title }}</p>
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}
+          <p>{{ . }}</p>
+        {{ else }}
+          <p>浏览我最近整理的内容。</p>
+        {{ end }}
+      </div>
+    </section>
   </header>
 {{ end }}
 
 {{ define "main" }}
   <section class="section-wrapper">
     <div class="container mx-auto px4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap6">
-        {{ range .Pages }}
-          <article class="feature-card">
-            <h3 class="text-xl font-semibold mb2">
-              <a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a>
-            </h3>
-            <p class="section-description" style="margin: 0 0 1.25rem; text-align: left;">
-              {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}
-            </p>
-            <p class="mid-gray" style="margin-bottom: 0.75rem;">
-              {{ partial "icons/calendar.html" . }} {{ .Date.Format "2006 年 1 月 2 日" }} ·
-              {{ partial "icons/clock.html" . }} {{ .ReadingTime }} 分钟
-            </p>
-            {{ with .Params.tags }}
-              <p class="mid-gray" style="margin-bottom: 0;">标签：{{ delimit . " / " }}</p>
-            {{ end }}
-          </article>
+      <div class="list-grid">
+        {{ if eq .Section "posts" }}
+          {{ range .Pages.ByDate.Reverse }}
+            <article class="directory-card">
+              <div class="directory-card-top">
+                <p class="directory-card-kicker">文章</p>
+                <p class="directory-card-meta">{{ .Date.Format "2006 年 1 月 2 日" }}</p>
+              </div>
+              <h3>
+                <a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a>
+              </h3>
+              <p class="directory-card-summary">
+                {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}
+              </p>
+              <p class="directory-card-footer">
+                {{ partial "icons/clock.html" . }} {{ .ReadingTime }} 分钟
+                {{ with .Params.tags }} · {{ delimit . " / " }}{{ end }}
+              </p>
+            </article>
+          {{ else }}
+            <p>暂时没有内容。</p>
+          {{ end }}
         {{ else }}
-          <p>暂时没有内容。</p>
+          {{ range .Pages.ByWeight }}
+            <article class="directory-card">
+              <div class="directory-card-top">
+                <p class="directory-card-kicker">{{ .CurrentSection.Title }}</p>
+                {{ with .Params.card_label }}
+                  <p class="directory-card-meta">{{ . }}</p>
+                {{ end }}
+              </div>
+              <h3>
+                <a href="{{ .RelPermalink }}" class="link-accent">{{ .Title }}</a>
+              </h3>
+              <p class="directory-card-summary">
+                {{ with .Params.summary }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}
+              </p>
+              {{ with .Params.github }}
+                <p class="directory-card-link-row">
+                  <a href="{{ . }}" class="directory-card-link" target="_blank" rel="noreferrer">GitHub</a>
+                </p>
+              {{ end }}
+              {{ with .Params.highlights }}
+                <div class="directory-chip-list">
+                  {{ range . }}
+                    <span>{{ . }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </article>
+          {{ else }}
+            <p>暂时没有内容。</p>
+          {{ end }}
         {{ end }}
       </div>
     </div>

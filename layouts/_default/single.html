@@ -15,6 +15,11 @@
       {{ else }}
         {{ with .Params.description }}<p>{{ . }}</p>{{ end }}
       {{ end }}
+      {{ with .Params.github }}
+        <p class="post-action-row">
+          <a href="{{ . }}" class="cta-button" target="_blank" rel="noreferrer">GitHub</a>
+        </p>
+      {{ end }}
     </div>
   </header>
 {{ end }}
