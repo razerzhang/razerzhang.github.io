@@ -73,7 +73,8 @@
           data-era="{{ .era }}"
           data-reference="{{ .reference }}"
           data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
-          style="--point-x: {{ .x }}; --point-y: {{ .y }};"
+          data-x="{{ .x }}"
+          data-y="{{ .y }}"
           aria-label="{{ .title }}"
         >
           <span class="framework-point-tooltip">{{ .title }}</span>
@@ -150,6 +151,7 @@
       const filters = Array.from(document.querySelectorAll("[data-filter]"));
       const cards = Array.from(document.querySelectorAll("[data-framework-card]"));
       const points = Array.from(document.querySelectorAll("[data-framework-target]"));
+      const canvasShell = document.querySelector(".framework-canvas-shell");
       const cardLayout = document.getElementById("framework-card-layout");
       const popup = document.getElementById("framework-popup");
       const popupIndex = document.getElementById("framework-popup-index");
@@ -163,6 +165,26 @@
       const popupLink = document.getElementById("framework-popup-link");
       const popupClose = document.querySelector(".framework-popup-close");
       let activeFramework = null;
+
+      function positionPoints() {
+        if (!canvasShell) return;
+
+        const styles = window.getComputedStyle(canvasShell);
+        const plotTop = parseFloat(styles.getPropertyValue("--plot-top")) || 0;
+        const plotRight = parseFloat(styles.getPropertyValue("--plot-right")) || 0;
+        const plotBottom = parseFloat(styles.getPropertyValue("--plot-bottom")) || 0;
+        const plotLeft = parseFloat(styles.getPropertyValue("--plot-left")) || 0;
+        const plotWidth = canvasShell.clientWidth - plotLeft - plotRight;
+        const plotHeight = canvasShell.clientHeight - plotTop - plotBottom;
+
+        points.forEach(function (point) {
+          const x = parseFloat(point.dataset.x || "0");
+          const y = parseFloat(point.dataset.y || "0");
+          point.style.left = (plotLeft + (plotWidth * x / 100)) + "px";
+          point.style.top = (plotTop + (plotHeight * y / 100)) + "px";
+          point.classList.add("is-positioned");
+        });
+      }
 
       function openPopup(source) {
         if (!popup || !source) return;
@@ -288,6 +310,9 @@
           closePopup();
         }
       });
+
+      positionPoints();
+      window.addEventListener("resize", positionPoints);
     });
   </script>
 {{ end }}

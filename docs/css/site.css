@@ -1245,18 +1245,21 @@ footer .footer-socials a:hover {
 
 .framework-point {
   position: absolute;
-  left: calc(var(--plot-left) + ((100% - var(--plot-left) - var(--plot-right)) * var(--point-x) / 100));
-  top: calc(var(--plot-top) + ((100% - var(--plot-top) - var(--plot-bottom)) * var(--point-y) / 100));
   width: 14px;
   height: 14px;
   border: 0;
   border-radius: 999px;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  opacity: 0;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.72);
   transition: transform var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease,
     opacity var(--transition-speed) ease;
+}
+
+.framework-point.is-positioned {
+  opacity: 1;
 }
 
 .framework-point.is-active {
