@@ -73,21 +73,53 @@
           data-era="{{ .era }}"
           data-reference="{{ .reference }}"
           data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
-          style="left: {{ .x }}%; top: {{ .y }}%;"
+          style="--point-x: {{ .x }}; --point-y: {{ .y }};"
           aria-label="{{ .title }}"
         >
           <span class="framework-point-tooltip">{{ .title }}</span>
         </button>
       {{ end }}
+    </div>
+  </section>
 
-      <div class="framework-popup" id="framework-popup" hidden>
+  <section class="framework-card-section">
+    <div class="framework-card-layout" id="framework-card-layout">
+      <div class="framework-card-grid">
+        {{ range .Params.frameworks }}
+          <article
+            class="framework-card"
+            id="framework-{{ .index }}"
+            data-framework-card="{{ .index }}"
+            data-category="{{ .category }}"
+            data-title="{{ .title }}"
+            data-summary="{{ .summary }}"
+            data-category-name="{{ .category_name }}"
+            data-index="{{ .index }}"
+            data-proposer="{{ .proposer }}"
+            data-suitable-for="{{ .suitable_for }}"
+            data-era="{{ .era }}"
+            data-reference="{{ .reference }}"
+            data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
+            tabindex="0"
+          >
+            <div class="framework-card-top">
+              <p class="framework-card-index"># {{ .index }}</p>
+              <span class="framework-card-tag category-{{ .category }}">{{ .category_name }}</span>
+            </div>
+            <h2>{{ .title }}</h2>
+            <p>{{ .summary }}</p>
+          </article>
+        {{ end }}
+      </div>
+
+      <aside class="framework-popup is-empty" id="framework-popup">
         <button class="framework-popup-close" type="button" aria-label="关闭">×</button>
         <p class="framework-popup-index" id="framework-popup-index"></p>
         <div class="framework-popup-top">
-          <span class="framework-popup-tag" id="framework-popup-tag"></span>
+          <span class="framework-popup-tag" id="framework-popup-tag">方法论卡片</span>
         </div>
-        <h2 id="framework-popup-title"></h2>
-        <p class="framework-popup-summary" id="framework-popup-summary"></p>
+        <h2 id="framework-popup-title">点击任意卡片，在右侧展开简介</h2>
+        <p class="framework-popup-summary" id="framework-popup-summary">右侧面板会展示该方法的简要介绍、提出者、适用场景、年代和引用资料。确认方向后，再从这里进入详情页。</p>
         <div class="framework-popup-meta">
           <div class="framework-popup-meta-item">
             <p class="framework-popup-meta-label">提出者</p>
@@ -109,37 +141,7 @@
         <p class="framework-popup-action">
           <a class="framework-popup-link" id="framework-popup-link" href="#">查看详情</a>
         </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="framework-card-section">
-    <div class="framework-card-grid">
-      {{ range .Params.frameworks }}
-        <article
-          class="framework-card"
-          id="framework-{{ .index }}"
-          data-framework-card="{{ .index }}"
-          data-category="{{ .category }}"
-          data-title="{{ .title }}"
-          data-summary="{{ .summary }}"
-          data-category-name="{{ .category_name }}"
-          data-index="{{ .index }}"
-          data-proposer="{{ .proposer }}"
-          data-suitable-for="{{ .suitable_for }}"
-          data-era="{{ .era }}"
-          data-reference="{{ .reference }}"
-          data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
-          tabindex="0"
-        >
-          <div class="framework-card-top">
-            <p class="framework-card-index"># {{ .index }}</p>
-            <span class="framework-card-tag category-{{ .category }}">{{ .category_name }}</span>
-          </div>
-          <h2>{{ .title }}</h2>
-          <p>{{ .summary }}</p>
-        </article>
-      {{ end }}
+      </aside>
     </div>
   </section>
 
@@ -148,6 +150,7 @@
       const filters = Array.from(document.querySelectorAll("[data-filter]"));
       const cards = Array.from(document.querySelectorAll("[data-framework-card]"));
       const points = Array.from(document.querySelectorAll("[data-framework-target]"));
+      const cardLayout = document.getElementById("framework-card-layout");
       const popup = document.getElementById("framework-popup");
       const popupIndex = document.getElementById("framework-popup-index");
       const popupTag = document.getElementById("framework-popup-tag");
@@ -165,6 +168,10 @@
         if (!popup || !source) return;
 
         activeFramework = source.dataset.index;
+        popup.classList.remove("is-empty");
+        if (cardLayout) {
+          cardLayout.classList.add("has-popup");
+        }
         popupIndex.textContent = "# " + source.dataset.index;
         popupTag.textContent = source.dataset.categoryName;
         popupTag.className = "framework-popup-tag category-" + source.dataset.category;
@@ -177,7 +184,6 @@
         if (popupLink) {
           popupLink.href = source.dataset.detailUrl || "#";
         }
-        popup.hidden = false;
 
         points.forEach(function (point) {
           point.classList.toggle("is-active", point.dataset.index === activeFramework);
@@ -190,8 +196,21 @@
 
       function closePopup() {
         activeFramework = null;
-        if (popup) {
-          popup.hidden = true;
+        popup.classList.add("is-empty");
+        if (cardLayout) {
+          cardLayout.classList.remove("has-popup");
+        }
+        popupIndex.textContent = "";
+        popupTag.textContent = "方法论卡片";
+        popupTag.className = "framework-popup-tag";
+        popupTitle.textContent = "点击任意卡片，在右侧展开简介";
+        popupSummary.textContent = "右侧面板会展示该方法的简要介绍、提出者、适用场景、年代和引用资料。确认方向后，再从这里进入详情页。";
+        popupProposer.textContent = "";
+        popupSuitable.textContent = "";
+        popupEra.textContent = "";
+        popupReference.textContent = "";
+        if (popupLink) {
+          popupLink.href = "#";
         }
 
         points.forEach(function (point) {
@@ -238,24 +257,22 @@
       points.forEach(function (point) {
         point.addEventListener("click", function () {
           openPopup(point);
+          const linkedCard = document.getElementById("framework-" + point.dataset.index);
+          if (linkedCard) {
+            linkedCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
         });
       });
 
       cards.forEach(function (card) {
         card.addEventListener("click", function () {
-          const targetUrl = card.dataset.detailUrl;
-          if (targetUrl) {
-            window.location.href = targetUrl;
-          }
+          openPopup(card);
         });
 
         card.addEventListener("keydown", function (event) {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            const targetUrl = card.dataset.detailUrl;
-            if (targetUrl) {
-              window.location.href = targetUrl;
-            }
+            openPopup(card);
           }
         });
       });
