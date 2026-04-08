@@ -58,6 +58,8 @@
 
       <div class="framework-grid-lines"></div>
 
+      <svg class="framework-connections" id="framework-connections"></svg>
+
       {{ range .Params.frameworks }}
         <button
           class="framework-point category-{{ .category }}"
@@ -152,6 +154,7 @@
       const cards = Array.from(document.querySelectorAll("[data-framework-card]"));
       const points = Array.from(document.querySelectorAll("[data-framework-target]"));
       const canvasShell = document.querySelector(".framework-canvas-shell");
+      const connectionsSvg = document.getElementById("framework-connections");
       const cardLayout = document.getElementById("framework-card-layout");
       const popup = document.getElementById("framework-popup");
       const popupIndex = document.getElementById("framework-popup-index");
@@ -177,12 +180,52 @@
         const plotWidth = canvasShell.clientWidth - plotLeft - plotRight;
         const plotHeight = canvasShell.clientHeight - plotTop - plotBottom;
 
-        points.forEach(function (point) {
+        points.forEach(function (point, i) {
           const x = parseFloat(point.dataset.x || "0");
           const y = parseFloat(point.dataset.y || "0");
           point.style.left = (plotLeft + (plotWidth * x / 100)) + "px";
           point.style.top = (plotTop + (plotHeight * y / 100)) + "px";
+          point.style.transitionDelay = (i * 45) + "ms";
           point.classList.add("is-positioned");
+        });
+
+        drawConnections();
+      }
+
+      function drawConnections() {
+        if (!connectionsSvg || !canvasShell) return;
+        connectionsSvg.innerHTML = "";
+
+        var categories = {};
+        points.forEach(function (point) {
+          if (point.classList.contains("is-hidden")) return;
+          var cat = point.dataset.category;
+          if (!categories[cat]) categories[cat] = [];
+          categories[cat].push({
+            x: parseFloat(point.style.left),
+            y: parseFloat(point.style.top)
+          });
+        });
+
+        Object.keys(categories).forEach(function (cat) {
+          var pts = categories[cat];
+          if (pts.length < 2) return;
+
+          for (var i = 0; i < pts.length - 1; i++) {
+            var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", pts[i].x);
+            line.setAttribute("y1", pts[i].y);
+            line.setAttribute("x2", pts[i + 1].x);
+            line.setAttribute("y2", pts[i + 1].y);
+            line.setAttribute("stroke-width", "1.5");
+            line.setAttribute("stroke-dasharray", "4 6");
+            line.classList.add("category-" + cat);
+            connectionsSvg.appendChild(line);
+
+            setTimeout((function (el) {
+              return function () { el.classList.add("is-visible"); };
+            })(line), 600 + i * 80);
+          }
         });
       }
 
@@ -258,6 +301,8 @@
           const visible = filter === "all" || point.dataset.category === filter;
           point.classList.toggle("is-hidden", !visible);
         });
+
+        drawConnections();
 
         if (activeFramework) {
           const activeStillVisible = filter === "all" || points.some(function (point) {

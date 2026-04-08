@@ -188,11 +188,11 @@
       };
 
       const categoryNarratives = {
-        insight: {
+        discover: {
           problemTitle: "在真正做方案之前，先把用户看清楚",
           problem: [
             "很多团队在需求讨论里最容易犯的错，不是没有想法，而是过早进入方案。还没弄清楚用户是谁、处在什么情境里、为什么会犹豫，就已经开始争论功能细节。",
-            framework.title + " 的价值，在于把注意力重新拉回用户本身。它不是为了制造更多研究动作，而是帮助团队用更可靠的方式理解真实动机、阻力与触点。",
+            framework.title + " 的价值，在于帮助团队用更可靠的方式理解真实动机、阻力与触点，把模糊诉求翻译成可讨论的问题。",
             "当问题从“我们想做什么”切回“用户正在经历什么”，后续的定义、设计与优先级判断才会更稳。"
           ],
           structureTitle: "从观察用户到沉淀洞察",
@@ -203,52 +203,22 @@
           historyTitle: "它为什么会被反复使用",
           relatedTitle: "和这些工具搭配更顺"
         },
-        definition: {
-          problemTitle: "把模糊诉求翻译成可讨论的问题",
-          problem: [
-            "需求评审里最危险的情况，是大家都在认真讨论，却讨论的不是同一个问题。目标、对象和边界没有被定义清楚时，方案越多反而越混乱。",
-            framework.title + " 的作用，是把“感觉要做”变成“为什么做、为谁做、先做什么”的结构化判断。",
-            "它帮助团队在进入设计之前先统一问题表述，从而避免后面花很大代价修正方向。"
-          ],
-          structureTitle: "先定义问题，再决定解法",
-          structureIntro: "这类方法的重点不是直接给答案，而是建立更清晰的问题框架。",
-          scenariosTitle: "什么时候该优先拿出来用？",
-          scenariosIntro: "当团队面对模糊输入、分歧较多或问题边界不清时，先用定义类方法会更稳。",
-          exampleTitle: "在产品讨论里的典型用法",
-          historyTitle: "它是如何进入产品工作流的",
-          relatedTitle: "常见的前后衔接工具"
-        },
-        design: {
+        plan: {
           problemTitle: "让方案不只是想法，而是有结构的设计",
           problem: [
-            "有了问题定义之后，团队仍然会面临另一个挑战：如何把洞察稳定地翻译成方案，而不是停留在灵光一现的想法。",
-            framework.title + " 帮助团队组织信息、连接要素，并把抽象判断落到更可执行的设计表达上。",
+            "有了问题定义之后，团队仍然会面临另一个挑战：如何把洞察稳定地翻译成方案，同时在资源有限时做出更清醒的取舍。",
+            framework.title + " 帮助团队组织信息、连接要素，并把抽象判断落到更可执行的设计表达和优先级排序上。",
             "它的意义不在于让文档变复杂，而在于让方案之间的差异、权衡与边界更容易被看见。"
           ],
           structureTitle: "把思考过程外显出来",
-          structureIntro: "设计类方法的共同点，是让原本隐性的判断过程变成能协作的可视结构。",
+          structureIntro: "规划类方法的共同点，是让原本隐性的判断过程变成能协作的可视结构。",
           scenariosTitle: "什么场景最适合它发挥作用？",
           scenariosIntro: "当团队需要共同看全局、拆路径、或者对齐设计逻辑时，这类方法很有价值。",
           exampleTitle: "从洞察到方案的过渡例子",
           historyTitle: "为什么它会在产品与服务设计中流行",
           relatedTitle: "常与这些方法串联使用"
         },
-        priority: {
-          problemTitle: "在资源有限时做出更清醒的取舍",
-          problem: [
-            "大多数产品问题不是“有没有东西可做”，而是“什么现在就该做”。当所有需求都显得合理时，优先级判断往往会变成声音大小的竞争。",
-            framework.title + " 的意义，是给团队一个更透明的判断标准，让排序不再只靠经验和直觉。",
-            "它把取舍逻辑公开出来，让不同角色至少能围绕同一套框架讨论，而不是各说各话。"
-          ],
-          structureTitle: "建立一套可复述的排序逻辑",
-          structureIntro: "优先级方法的核心，不是追求绝对正确，而是把标准讲清楚、反复复用。",
-          scenariosTitle: "什么情况下最值得使用？",
-          scenariosIntro: "当 backlog 变长、资源变紧、分歧变多时，优先级方法能帮团队快速回到同一张桌子上。",
-          exampleTitle: "一个典型的排序场景",
-          historyTitle: "它为什么会成为团队常用工具",
-          relatedTitle: "前后通常会搭这些方法"
-        },
-        system_design: {
+        design: {
           problemTitle: "让业务逻辑和系统结构对得上",
           problem: [
             "系统设计最常见的问题，不是技术选型本身，而是业务概念、系统边界和团队协作没有一起被讲清楚。",
@@ -263,7 +233,7 @@
           historyTitle: "它为什么在复杂系统里反复出现",
           relatedTitle: "适合搭配的上下游方法"
         },
-        validation: {
+        validate: {
           problemTitle: "在正式投入前，先验证方向是不是对的",
           problem: [
             "很多返工不是因为执行差，而是因为方向错。上线后才发现用户不理解、不需要，代价往往远高于提前验证。",
@@ -278,12 +248,12 @@
           historyTitle: "它是如何成为现代产品默认动作的",
           relatedTitle: "常和这些方法一起用"
         },
-        delivery: {
+        deliver: {
           problemTitle: "把想法真正推进成可交付的结果",
           problem: [
             "很多团队并不缺洞察和方案，真正困难的是如何把这些想法转成稳定的执行节奏、责任分工和交付结果。",
             framework.title + " 提供了一套更清晰的推进方式，让复杂协作不至于在执行阶段失速。",
-            "它的价值不是增加流程，而是帮助团队在节奏、范围和责任上形成共同预期。"
+            "它的价值不是增加流程，而是帮助团队在节奏、范围和责任上形成共同预期，并让交付结束成为下一轮优化的起点。"
           ],
           structureTitle: "从计划、协同到交付闭环",
           structureIntro: "交付类方法的核心，是把模糊目标拆成团队能一起推进的节奏与产出。",
@@ -292,36 +262,6 @@
           exampleTitle: "一个典型的交付协作案例",
           historyTitle: "它为什么会成为执行层的经典工具",
           relatedTitle: "常见的上下游搭配"
-        },
-        growth: {
-          problemTitle: "让交付结束成为下一轮优化的起点",
-          problem: [
-            "如果产品工作只停在上线，团队会很快失去积累。真正拉开差距的，往往是上线之后如何读结果、找偏差、做下一轮决策。",
-            framework.title + " 把注意力放在目标反馈和持续优化上，帮助团队建立更长期的视角。",
-            "它不是让复盘更正式，而是让经验可以被保留下来，并进入下一轮工作流。"
-          ],
-          structureTitle: "围绕结果做持续学习",
-          structureIntro: "增长与复盘类方法最重要的，是把结果重新送回决策链路中。",
-          scenariosTitle: "什么时候值得优先用它？",
-          scenariosIntro: "当团队已进入持续迭代和增长阶段，这类方法比单次交付视角更重要。",
-          exampleTitle: "一个典型的复盘与增长场景",
-          historyTitle: "它如何从实践中沉淀为框架",
-          relatedTitle: "常见的搭配组合"
-        },
-        system: {
-          problemTitle: "让多人协作建立在同一套目标和边界上",
-          problem: [
-            "当问题跨团队、跨系统、跨阶段时，最大的成本往往不是执行，而是没有共同的语言和边界。",
-            framework.title + " 帮助团队把目标、责任、依赖和风险摊开来谈，让协作建立在更清楚的框架上。",
-            "它的作用，是减少系统性工作中的模糊地带，让组织能围绕同一方向持续推进。"
-          ],
-          structureTitle: "把目标、角色与依赖连接起来",
-          structureIntro: "系统协同类方法强调的是全局视角，而不是只优化单个局部。",
-          scenariosTitle: "什么情况下会特别需要它？",
-          scenariosIntro: "当多个团队共同推进复杂目标时，没有系统级框架往往最容易失控。",
-          exampleTitle: "一个典型的跨团队协同场景",
-          historyTitle: "它为何成为组织协同中的经典方法",
-          relatedTitle: "适合搭配的工具组合"
         }
       };
 
@@ -344,7 +284,7 @@
       }
 
       function getCategoryConfig(category) {
-        return categoryNarratives[category] || categoryNarratives.definition;
+        return categoryNarratives[category] || categoryNarratives.discover;
       }
 
       function getStructure(framework) {
@@ -352,7 +292,7 @@
           return customStructures[framework.title];
         }
 
-        if (framework.category === "insight") {
+        if (framework.category === "discover") {
           return [
             { short: "看", label: "进入场景", description: "先回到真实使用情境，而不是从会议室里的假设开始。" },
             { short: "听", label: "识别信号", description: "捕捉语言背后的目标、阻力和情绪变化。" },
@@ -360,23 +300,23 @@
           ];
         }
 
-        if (framework.category === "definition") {
+        if (framework.category === "plan") {
           return [
-            { short: "定", label: "界定问题", description: "先把讨论对象、边界和成功标准说清楚。" },
-            { short: "拆", label: "拆出关键", description: "分离表面诉求和真正核心问题，避免直接跳方案。" },
-            { short: "聚", label: "形成判断", description: "输出一个更可行动的问题表达，进入下一步设计。" }
+            { short: "连", label: "连接要素", description: "把用户目标、流程、触点或价值关系放到一张图里看。" },
+            { short: "显", label: "外显逻辑", description: "让方案和排序标准形成结构，不只是停留在口头描述。" },
+            { short: "定", label: "支持决策", description: "帮助团队比较不同路径，并决定下一步推进方式。" }
           ];
         }
 
         if (framework.category === "design") {
           return [
-            { short: "连", label: "连接要素", description: "把用户目标、流程、触点或价值关系放到一张图里看。" },
-            { short: "显", label: "外显逻辑", description: "让方案形成结构，不只是停留在口头描述。" },
-            { short: "定", label: "支持决策", description: "帮助团队比较不同路径，并决定下一步推进方式。" }
+            { short: "析", label: "业务分析", description: "把业务概念、规则和边界理清楚。" },
+            { short: "建", label: "结构建模", description: "将业务抽象转化成模块、边界和接口。" },
+            { short: "通", label: "团队对齐", description: "让设计结果能被不同角色理解和讨论。" }
           ];
         }
 
-        if (framework.category === "validation") {
+        if (framework.category === "validate") {
           return [
             { short: "假", label: "提出假设", description: "明确此刻最值得验证的不确定性是什么。" },
             { short: "试", label: "低成本验证", description: "尽量在投入较小的情况下收集真实反馈。" },
@@ -384,19 +324,11 @@
           ];
         }
 
-        if (framework.category === "growth") {
+        if (framework.category === "deliver") {
           return [
-            { short: "看", label: "看结果", description: "先围绕目标表现读取结果，而不是只看动作完成没完成。" },
-            { short: "解", label: "解偏差", description: "找出偏差背后的原因和可控变量。" },
-            { short: "续", label: "进入下一轮", description: "把复盘结论沉淀成后续优化动作和指标跟踪。" }
-          ];
-        }
-
-        if (framework.category === "system") {
-          return [
-            { short: "齐", label: "统一目标", description: "先让所有参与者知道真正要对齐的方向是什么。" },
-            { short: "明", label: "看清依赖", description: "识别责任、边界和关键关系，避免后期失控。" },
-            { short: "控", label: "持续治理", description: "通过明确框架减少协作中的灰区和重复沟通。" }
+            { short: "拆", label: "拆解目标", description: "把复杂任务拆成团队能推进的阶段和产出。" },
+            { short: "推", label: "稳定推进", description: "用节奏和仪式确保执行不走样。" },
+            { short: "回", label: "复盘迭代", description: "把交付结果送回决策链路，进入下一轮优化。" }
           ];
         }
 
@@ -430,15 +362,11 @@
 
       function getOutput(framework) {
         const outputs = {
-          insight: "更清晰的用户洞察、关键触点和行为模式",
-          definition: "结构化的问题定义、目标用户与优先问题表述",
-          design: "更完整的方案结构、路径图或价值映射",
-          priority: "带判断依据的优先级顺序与取舍标准",
-          system_design: "更可沟通的架构边界、模块关系或建模结果",
-          validation: "真实反馈、可验证结论与下一步调整建议",
-          delivery: "更明确的节奏、责任分工和交付物安排",
-          growth: "可复用的复盘结论、指标判断和优化动作",
-          system: "更清晰的目标、依赖、责任关系和协作框架"
+          discover: "更清晰的用户洞察、关键触点、行为模式和问题定义",
+          plan: "更完整的方案结构、路径图、价值映射和优先级排序",
+          design: "更可沟通的架构边界、模块关系或建模结果",
+          validate: "真实反馈、可验证结论与下一步调整建议",
+          deliver: "更明确的节奏、责任分工、交付物安排和优化动作"
         };
         return outputs[framework.category] || "更清晰的判断标准与下一步动作";
       }
@@ -504,17 +432,13 @@
       const nextFramework = frameworks[(currentIndex + 1) % frameworks.length];
 
       const accentMap = {
-        insight: ["#3c7258", "#edf7f1"],
-        definition: ["#476993", "#eef4fb"],
-        design: ["#8a662d", "#f7f0df"],
-        priority: ["#954b48", "#faefee"],
-        system_design: ["#496b89", "#eef4f8"],
-        validation: ["#685299", "#f1ecfb"],
-        delivery: ["#6c53a1", "#f1edfb"],
-        growth: ["#4d7a47", "#edf6ea"],
-        system: ["#7c496d", "#f7eef4"]
+        discover: ["#2a7052", "#dff0e4"],
+        plan: ["#3a5d94", "#e3ecf8"],
+        design: ["#8b5b1a", "#f5ead6"],
+        validate: ["#6e4ba0", "#ece0f6"],
+        deliver: ["#a05032", "#fde8db"]
       };
-      const accent = accentMap[framework.category] || accentMap.definition;
+      const accent = accentMap[framework.category] || accentMap.discover;
       document.documentElement.style.setProperty("--framework-detail-accent", accent[0]);
       document.documentElement.style.setProperty("--framework-detail-accent-soft", accent[1]);
       document.documentElement.style.setProperty("--framework-detail-accent-line", accent[0] + "22");
