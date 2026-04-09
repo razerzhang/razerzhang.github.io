@@ -314,4 +314,37 @@ frameworks:
     reference: "PMI《PMBOK Guide》"
     x: 94
     y: 62
+  - index: "27"
+    title: "决策矩阵"
+    category: "plan"
+    category_name: "规划"
+    summary: "把多个可选方案放到同一套评估维度下打分对比，帮助团队在信息不完整时做出更透明、更可复盘的决策。"
+    proposer: "决策分析通用方法，Benjamin Franklin 最早记录类似实践"
+    suitable_for: "技术选型、方案对比、Build vs Buy 决策、路线图取舍"
+    era: "决策分析领域长期使用，产品与工程团队在 2010 年代广泛采纳"
+    reference: "Pugh Matrix；Kepner-Tregoe Decision Analysis"
+    x: 40
+    y: 22
+  - index: "28"
+    title: "技术方案文档"
+    category: "design"
+    category_name: "设计"
+    summary: "用结构化文档把问题背景、可选方案、技术对比和建议写清楚，让技术决策从口头讨论变成可追溯的书面判断。"
+    proposer: "工程实践通用方法，Google 等公司在 2010 年代系统化推广 Design Doc 和 RFC 流程"
+    suitable_for: "技术方案评审、架构决策记录、跨团队对齐、可行性评估"
+    era: "2010 年代在大型工程组织中系统化"
+    reference: "Google Design Docs；ADR (Architecture Decision Records)"
+    x: 56
+    y: 82
+  - index: "29"
+    title: "RAPID"
+    category: "deliver"
+    category_name: "交付与增长"
+    summary: "明确每个决策中谁提建议、谁提供输入、谁有否决权、谁最终拍板，避免责任模糊导致决策卡住或反复。"
+    proposer: "Bain & Company"
+    suitable_for: "跨团队决策、职责划分、避免决策僵局、组织协同"
+    era: "2000 年代由 Bain 提出并推广"
+    reference: "Bain & Company《RAPID: An Approach to Better Decision Making》"
+    x: 85
+    y: 32
 ---
