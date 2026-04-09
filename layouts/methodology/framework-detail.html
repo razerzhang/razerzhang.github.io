@@ -14,7 +14,7 @@
   {{ $frameworks := $mapPage.Params.frameworks }}
   {{ $categories := after 1 $mapPage.Params.categories }}
   <script id="framework-detail-data" type="application/json">
-    {{ dict "frameworks" $frameworks "categories" $categories "mapLink" $mapPage.RelPermalink | jsonify }}
+    {{ dict "frameworks" $frameworks "categories" $categories "mapLink" $mapPage.RelPermalink | jsonify | safeHTML }}
   </script>
 
   <section class="framework-detail-hero">
@@ -139,7 +139,8 @@
       const dataEl = document.getElementById("framework-detail-data");
       if (!dataEl) return;
 
-      const dataset = JSON.parse(dataEl.textContent);
+      const raw = JSON.parse(dataEl.textContent);
+      const dataset = typeof raw === "string" ? JSON.parse(raw) : raw;
       const frameworks = dataset.frameworks || [];
       const categories = dataset.categories || [];
       const categoryOrder = categories.map(function (item) { return item.id; });
