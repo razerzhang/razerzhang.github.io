@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on Runzhe Zhang - 个人博客</title><link>https://runzhezhang.github.io/tags/ai/</link><description>Recent content in AI on Runzhe Zhang - 个人博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sat, 04 Apr 2026 21:58:00 +0800</lastBuildDate><atom:link href="https://runzhezhang.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>源码阅读的关键：模式匹配</title><link>https://runzhezhang.github.io/posts/code-read/</link><pubDate>Sat, 04 Apr 2026 21:58:00 +0800</pubDate><guid>https://runzhezhang.github.io/posts/code-read/</guid><description>在 AI 时代，高效阅读源码的关键不再是逐行理解实现细节，而是建立全局地图、聚焦关键路径、带着问题阅读，并通过输出和反馈沉淀设计理解。</description></item><item><title>Skill 不是外挂，而是 Agent 的组织方式</title><link>https://runzhezhang.github.io/posts/skill/</link><pubDate>Thu, 26 Mar 2026 21:25:28 +0600</pubDate><guid>https://runzhezhang.github.io/posts/skill/</guid><description>&lt;p&gt;Skill 这件事最近在企业里很热。很多团队都在说，业务流程可以被拆成一个个 Skill，Agent 之所以开始“能干活”，也是因为有了 Skill。&lt;/p&gt;
-&lt;p&gt;这类说法不算错，但大多只说现象，没有说清本质。我的判断是：&lt;strong&gt;Skill 不是给模型额外挂了一个能力包，而是在重新组织 Agent 所需的上下文。&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;换句话说，Skill 的核心价值不在“知识更多了”，而在“模型终于能在正确的时候拿到正确的知识、工具和执行约束”。&lt;/p&gt;
-&lt;h2 id="一skill-到底是什么"&gt;一、Skill 到底是什么&lt;/h2&gt;
-&lt;p&gt;如果从字面理解，skill 是“技能”。但在 Agent 系统里，它并不是抽象能力，而更像一个&lt;strong&gt;可被模型按需调用的任务单元&lt;/strong&gt;。一个完整的 Skill 往往包含四部分内容：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;任务适用范围：它解决什么问题，不解决什么问题。&lt;/li&gt;
-&lt;li&gt;操作说明：模型应该按什么步骤完成任务。&lt;/li&gt;
-&lt;li&gt;依赖知识：完成任务需要知道哪些背景信息、规则和约束。&lt;/li&gt;
-&lt;li&gt;可调用工具：模型在执行过程中能调用哪些脚本、接口或系统能力。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;因此，Skill 不是单纯的 prompt，也不是单纯的 tool，更不是一段静态知识。它是把&lt;strong&gt;目标、方法、知识和工具&lt;/strong&gt;组织在一起，交给模型按需装载的一种结构。&lt;/p&gt;
-&lt;h2 id="二为什么-skill-会突然变得重要"&gt;二、为什么 Skill 会突然变得重要&lt;/h2&gt;
-&lt;p&gt;大模型能力变强之后，一个更现实的问题暴露出来了：模型不是不会推理，而是&lt;strong&gt;经常在错误的上下文里推理&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;很多 Agent 失败，并不是因为模型“智商不够”，而是因为它在执行任务时面临三类典型问题：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;不知道当前任务到底该用哪一套规则。&lt;/li&gt;
-&lt;li&gt;知道规则，但不知道该调用哪个工具。&lt;/li&gt;
-&lt;li&gt;工具和知识分散在不同地方，模型很难把它们稳定地拼起来。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这也是为什么很多团队做了大量 context engineering，效果却依然不稳定。问题不只是“给模型更多上下文”，而是“如何把真正相关的上下文，以可执行的方式组织进去”。&lt;/p&gt;
-&lt;p&gt;Skill 的出现，正是为了解这个问题。&lt;/p&gt;
-&lt;h2 id="三为什么只靠-rag-不够"&gt;三、为什么只靠 RAG 不够&lt;/h2&gt;
-&lt;p&gt;很多系统最早的方案是 RAG：先检索，再把召回内容塞进上下文，让模型回答或执行。&lt;/p&gt;
-&lt;p&gt;RAG 很有价值，但它更擅长解决“知道什么”，不擅长解决“该怎么做”。一旦任务进入执行阶段，RAG 往往会暴露三个短板：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;检索结果偏知识片段，不是完整操作单元。模型拿到了说明书，却不一定拿到了工具。&lt;/li&gt;
-&lt;li&gt;召回稳定性不足。相似问题在不同轮次里，可能召回出不同材料，导致执行结果波动。&lt;/li&gt;
-&lt;li&gt;工具和知识分离。知识在向量库里，工具在代码里，模型需要自己把两者拼接起来，这一步往往最不稳定。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这正是 Skill 更有穿透力的地方。Skill 把知识和工具预先绑定，让模型在加载某个任务单元时，同时获得：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;这件事该怎么做&lt;/li&gt;
-&lt;li&gt;这件事能用什么工具做&lt;/li&gt;
-&lt;li&gt;这件事有哪些约束不能违反&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;从这个角度看，Skill 不是替代 RAG，而是在很多执行型任务里，把 RAG 的“知识召回”推进成“可执行上下文装配”。&lt;/p&gt;
-&lt;h2 id="四skill-真正解决的是上下文组织问题"&gt;四、Skill 真正解决的，是上下文组织问题&lt;/h2&gt;
-&lt;p&gt;很多人把 Skill 理解成“封装经验”，这没有错，但还不够精确。更准确的说法是：&lt;strong&gt;Skill 是一种上下文压缩与按需披露机制。&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>情绪感知力</title><link>https://runzhezhang.github.io/posts/emotional-awareness/</link><pubDate>Sun, 01 Mar 2026 22:38:49 +0800</pubDate><guid>https://runzhezhang.github.io/posts/emotional-awareness/</guid><description>遇到别人抛来的问题，我总想着去解决，而不是倾听。情绪感知力让我学会先把解决问题的冲动放慢一点。</description></item><item><title>2025 年度总结：改变</title><link>https://runzhezhang.github.io/posts/summary-2026/</link><pubDate>Sun, 22 Feb 2026 18:32:58 +0800</pubDate><guid>https://runzhezhang.github.io/posts/summary-2026/</guid><description>2025 年，一切都在变：职责变了，vibe coding 改变了写代码的方式。用一个词形容这一年——改变。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on Runzhe Zhang - 个人博客</title><link>https://runzhezhang.github.io/tags/ai/</link><description>Recent content in AI on Runzhe Zhang - 个人博客</description><generator>Hugo</generator><language>zh-cn</language><lastBuildDate>Sat, 04 Apr 2026 21:58:00 +0800</lastBuildDate><atom:link href="https://runzhezhang.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>源码阅读的关键：模式匹配</title><link>https://runzhezhang.github.io/posts/code-read/</link><pubDate>Sat, 04 Apr 2026 21:58:00 +0800</pubDate><guid>https://runzhezhang.github.io/posts/code-read/</guid><description>在 AI 时代，高效阅读源码的关键不再是逐行理解实现细节，而是建立全局地图、聚焦关键路径、带着问题阅读，并通过输出和反馈沉淀设计理解。</description></item><item><title>Skill 不是外挂，而是 Agent 的组织方式</title><link>https://runzhezhang.github.io/posts/skill/</link><pubDate>Thu, 26 Mar 2026 21:25:28 +0600</pubDate><guid>https://runzhezhang.github.io/posts/skill/</guid><description>&lt;p>Skill 这件事最近在企业里很热。很多团队都在说，业务流程可以被拆成一个个 Skill，Agent 之所以开始“能干活”，也是因为有了 Skill。&lt;/p>
+&lt;p>这类说法不算错，但大多只说现象，没有说清本质。我的判断是：&lt;strong>Skill 不是给模型额外挂了一个能力包，而是在重新组织 Agent 所需的上下文。&lt;/strong>&lt;/p>
+&lt;p>换句话说，Skill 的核心价值不在“知识更多了”，而在“模型终于能在正确的时候拿到正确的知识、工具和执行约束”。&lt;/p>
+&lt;h2 id="一skill-到底是什么">一、Skill 到底是什么&lt;/h2>
+&lt;p>如果从字面理解，skill 是“技能”。但在 Agent 系统里，它并不是抽象能力，而更像一个&lt;strong>可被模型按需调用的任务单元&lt;/strong>。一个完整的 Skill 往往包含四部分内容：&lt;/p>
+&lt;ol>
+&lt;li>任务适用范围：它解决什么问题，不解决什么问题。&lt;/li>
+&lt;li>操作说明：模型应该按什么步骤完成任务。&lt;/li>
+&lt;li>依赖知识：完成任务需要知道哪些背景信息、规则和约束。&lt;/li>
+&lt;li>可调用工具：模型在执行过程中能调用哪些脚本、接口或系统能力。&lt;/li>
+&lt;/ol>
+&lt;p>因此，Skill 不是单纯的 prompt，也不是单纯的 tool，更不是一段静态知识。它是把&lt;strong>目标、方法、知识和工具&lt;/strong>组织在一起，交给模型按需装载的一种结构。&lt;/p>
+&lt;h2 id="二为什么-skill-会突然变得重要">二、为什么 Skill 会突然变得重要&lt;/h2>
+&lt;p>大模型能力变强之后，一个更现实的问题暴露出来了：模型不是不会推理，而是&lt;strong>经常在错误的上下文里推理&lt;/strong>。&lt;/p>
+&lt;p>很多 Agent 失败，并不是因为模型“智商不够”，而是因为它在执行任务时面临三类典型问题：&lt;/p>
+&lt;ol>
+&lt;li>不知道当前任务到底该用哪一套规则。&lt;/li>
+&lt;li>知道规则，但不知道该调用哪个工具。&lt;/li>
+&lt;li>工具和知识分散在不同地方，模型很难把它们稳定地拼起来。&lt;/li>
+&lt;/ol>
+&lt;p>这也是为什么很多团队做了大量 context engineering，效果却依然不稳定。问题不只是“给模型更多上下文”，而是“如何把真正相关的上下文，以可执行的方式组织进去”。&lt;/p>
+&lt;p>Skill 的出现，正是为了解这个问题。&lt;/p>
+&lt;h2 id="三为什么只靠-rag-不够">三、为什么只靠 RAG 不够&lt;/h2>
+&lt;p>很多系统最早的方案是 RAG：先检索，再把召回内容塞进上下文，让模型回答或执行。&lt;/p>
+&lt;p>RAG 很有价值，但它更擅长解决“知道什么”，不擅长解决“该怎么做”。一旦任务进入执行阶段，RAG 往往会暴露三个短板：&lt;/p>
+&lt;ol>
+&lt;li>检索结果偏知识片段，不是完整操作单元。模型拿到了说明书，却不一定拿到了工具。&lt;/li>
+&lt;li>召回稳定性不足。相似问题在不同轮次里，可能召回出不同材料，导致执行结果波动。&lt;/li>
+&lt;li>工具和知识分离。知识在向量库里，工具在代码里，模型需要自己把两者拼接起来，这一步往往最不稳定。&lt;/li>
+&lt;/ol>
+&lt;p>这正是 Skill 更有穿透力的地方。Skill 把知识和工具预先绑定，让模型在加载某个任务单元时，同时获得：&lt;/p>
+&lt;ul>
+&lt;li>这件事该怎么做&lt;/li>
+&lt;li>这件事能用什么工具做&lt;/li>
+&lt;li>这件事有哪些约束不能违反&lt;/li>
+&lt;/ul>
+&lt;p>从这个角度看，Skill 不是替代 RAG，而是在很多执行型任务里，把 RAG 的“知识召回”推进成“可执行上下文装配”。&lt;/p>
+&lt;h2 id="四skill-真正解决的是上下文组织问题">四、Skill 真正解决的，是上下文组织问题&lt;/h2>
+&lt;p>很多人把 Skill 理解成“封装经验”，这没有错，但还不够精确。更准确的说法是：&lt;strong>Skill 是一种上下文压缩与按需披露机制。&lt;/strong>&lt;/p></description></item><item><title>情绪感知力</title><link>https://runzhezhang.github.io/posts/emotional-awareness/</link><pubDate>Sun, 01 Mar 2026 22:38:49 +0800</pubDate><guid>https://runzhezhang.github.io/posts/emotional-awareness/</guid><description>遇到别人抛来的问题，我总想着去解决，而不是倾听。情绪感知力让我学会先把解决问题的冲动放慢一点。</description></item><item><title>2025 年度总结：改变</title><link>https://runzhezhang.github.io/posts/summary-2026/</link><pubDate>Sun, 22 Feb 2026 18:32:58 +0800</pubDate><guid>https://runzhezhang.github.io/posts/summary-2026/</guid><description>2025 年，一切都在变：职责变了，vibe coding 改变了写代码的方式。用一个词形容这一年——改变。</description></item></channel></rss>

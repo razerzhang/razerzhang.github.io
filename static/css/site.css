@@ -811,6 +811,21 @@ nav a:hover {
   line-height: 1.7;
 }
 
+.post-cover-frame {
+  margin-bottom: 1.5rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.post-cover-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .post-meta {
   display: flex;
   justify-content: center;
@@ -920,6 +935,20 @@ nav a:hover {
   color: var(--highlight-text);
 }
 
+.post-card-cover-link {
+  display: block;
+  margin: -0.35rem -0.35rem 1.25rem;
+}
+
+.post-card-cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
 footer {
   background: var(--footer-bg);
   color: var(--footer-text);
@@ -982,6 +1011,10 @@ footer .footer-socials a:hover {
 
   .post-hero {
     padding: 3rem 1.25rem 1.5rem;
+  }
+
+  .post-card-cover-link {
+    margin: -0.15rem -0.15rem 1rem;
   }
 
   .content-wrapper {

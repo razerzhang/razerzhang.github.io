@@ -22,6 +22,12 @@
         {{ if eq .Section "posts" }}
           {{ range .Pages.ByDate.Reverse }}
             <article class="directory-card">
+              {{ $page := . }}
+              {{ with .Params.cover }}
+                <a href="{{ $page.RelPermalink }}" class="post-card-cover-link">
+                  <img src="{{ . | relURL }}" alt="{{ $page.Title }}" class="post-card-cover">
+                </a>
+              {{ end }}
               <div class="directory-card-top">
                 <p class="directory-card-kicker">文章</p>
                 <p class="directory-card-meta">{{ .Date.Format "2006 年 1 月 2 日" }}</p>

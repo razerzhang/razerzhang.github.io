@@ -1,0 +1,72 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#081018"/>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.7">
+    <path d="M0 736C151 674 274 640 420 654C560 666 678 731 821 726C948 722 1062 658 1188 624C1318 589 1446 585 1600 625V900H0V736Z" fill="url(#ground)"/>
+    <path d="M0 778C157 710 286 690 431 710C577 730 669 794 809 794C954 794 1062 736 1197 710C1326 686 1454 694 1600 746V900H0V778Z" fill="#081119" fill-opacity="0.72"/>
+  </g>
+  <g opacity="0.9">
+    <circle cx="1132" cy="298" r="176" stroke="#E3B87D" stroke-opacity="0.42" stroke-width="1.5"/>
+    <circle cx="1132" cy="298" r="112" stroke="#F5E0B8" stroke-opacity="0.3" stroke-width="1.2"/>
+    <circle cx="1132" cy="298" r="48" fill="url(#core)" fill-opacity="0.95"/>
+    <path d="M1132 122V474" stroke="url(#vertical)" stroke-width="1.2" stroke-dasharray="5 8"/>
+    <path d="M956 298H1308" stroke="url(#horizontal)" stroke-width="1.2" stroke-dasharray="5 8"/>
+  </g>
+  <g opacity="0.55">
+    <path d="M1010 180L1128 298L1244 214L1358 330L1244 444L1128 362L1010 480" stroke="#F6D39B" stroke-width="2"/>
+    <circle cx="1010" cy="180" r="7" fill="#F6D39B"/>
+    <circle cx="1128" cy="298" r="8" fill="#FFF0D2"/>
+    <circle cx="1244" cy="214" r="7" fill="#F6D39B"/>
+    <circle cx="1358" cy="330" r="7" fill="#F6D39B"/>
+    <circle cx="1244" cy="444" r="7" fill="#F6D39B"/>
+    <circle cx="1128" cy="362" r="7" fill="#F6D39B"/>
+    <circle cx="1010" cy="480" r="7" fill="#F6D39B"/>
+  </g>
+  <g opacity="0.4">
+    <path d="M120 182H666" stroke="#5A7895" stroke-width="1"/>
+    <path d="M120 734H666" stroke="#5A7895" stroke-width="1"/>
+    <path d="M120 182V734" stroke="#5A7895" stroke-width="1"/>
+    <path d="M666 182V734" stroke="#5A7895" stroke-width="1"/>
+    <path d="M120 458H666" stroke="#5A7895" stroke-opacity="0.55" stroke-width="1"/>
+    <path d="M393 182V734" stroke="#5A7895" stroke-opacity="0.55" stroke-width="1"/>
+  </g>
+  <g opacity="0.72">
+    <text x="144" y="286" fill="#F7F2EA" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-weight="700" letter-spacing="3">ONTOLOGY</text>
+    <text x="144" y="360" fill="#E9C58E" font-family="'JetBrains Mono', 'SFMono-Regular', monospace" font-size="26" letter-spacing="7">FROM BEING TO ENTERPRISE AI</text>
+    <text x="144" y="472" fill="#D9E2EC" font-family="'Noto Serif SC', 'Songti SC', serif" font-size="44" font-weight="600">本体论</text>
+    <text x="144" y="534" fill="#C3D0DE" font-family="'Noto Sans SC', 'PingFang SC', sans-serif" font-size="30">从“存在是什么”到企业 AI 为什么突然谈论它</text>
+    <text x="144" y="646" fill="#91A4B8" font-family="'JetBrains Mono', 'SFMono-Regular', monospace" font-size="20" letter-spacing="5">ABSTRACTION / STRUCTURE / OPERATIONAL MEANING</text>
+  </g>
+  <g opacity="0.45">
+    <circle cx="280" cy="126" r="3.5" fill="#E3B87D"/>
+    <circle cx="332" cy="126" r="3.5" fill="#E3B87D"/>
+    <circle cx="384" cy="126" r="3.5" fill="#E3B87D"/>
+    <path d="M1384 132L1478 132" stroke="#E3B87D" stroke-width="1.5"/>
+    <path d="M1428 88L1428 176" stroke="#E3B87D" stroke-width="1.5"/>
+  </g>
+  <defs>
+    <linearGradient id="bg" x1="124" y1="112" x2="1436" y2="796" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F2031"/>
+      <stop offset="0.48" stop-color="#101923"/>
+      <stop offset="1" stop-color="#24180D"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="306" y1="624" x2="1388" y2="818" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#132433"/>
+      <stop offset="1" stop-color="#3C2816"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1132 298) rotate(90) scale(48)">
+      <stop stop-color="#FFF6DE"/>
+      <stop offset="1" stop-color="#D79D53"/>
+    </radialGradient>
+    <linearGradient id="vertical" x1="1132" y1="122" x2="1132" y2="474" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3B87D" stop-opacity="0"/>
+      <stop offset="0.48" stop-color="#E3B87D"/>
+      <stop offset="1" stop-color="#E3B87D" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="horizontal" x1="956" y1="298" x2="1308" y2="298" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E3B87D" stop-opacity="0"/>
+      <stop offset="0.48" stop-color="#E3B87D"/>
+      <stop offset="1" stop-color="#E3B87D" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+</svg>
