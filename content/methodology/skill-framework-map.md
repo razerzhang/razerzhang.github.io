@@ -1,13 +1,14 @@
 ---
 title: "产品方法论框架地图"
 slug: "framework-map"
-description: "从需求发现到交付复盘，整理覆盖产品全链路的经典方法论。点击任意方法可以先建立全局地图，再进入具体节点。"
-summary: "一张覆盖需求、定义、设计、验证、交付与增长的产品方法论地图。"
+description: "从需求发现、产品规划到系统架构设计与交付复盘，整理覆盖产品全链路的经典方法论。点击任意方法可以先建立全局地图，再进入具体节点。"
+summary: "一张覆盖需求、定义、架构设计、验证、交付与增长的产品方法论地图。"
 weight: 2
 card_label: "框架地图"
 highlights:
   - 用户洞察
   - 问题定义
+  - 架构设计
   - 执行落地
 layout: "skill-map"
 date: 2026-04-06T20:30:00+08:00
@@ -38,7 +39,7 @@ frameworks:
     era: "2013 年前后在现代 UX 实践中广泛普及"
     reference: "Steve Portigal《Interviewing Users》"
     x: 6
-    y: 22
+    y_pct: 22
   - index: "02"
     title: "用户旅程地图"
     category: "discover"
@@ -49,7 +50,7 @@ frameworks:
     era: "2016 年前后在体验设计领域系统化传播"
     reference: "Jim Kalbach《Mapping Experiences》"
     x: 18
-    y: 44
+    y_pct: 44
   - index: "03"
     title: "同理心地图"
     category: "discover"
@@ -60,7 +61,7 @@ frameworks:
     era: "2010 年前后"
     reference: "Dave Gray 等《Gamestorming》；XPLANE Empathy Map"
     x: 11
-    y: 62
+    y_pct: 62
   - index: "04"
     title: "JTBD"
     category: "discover"
@@ -71,7 +72,7 @@ frameworks:
     era: "2000 年代至 2010 年代"
     reference: "Clayton Christensen《Competing Against Luck》"
     x: 22
-    y: 15
+    y_pct: 15
   - index: "05"
     title: "五个为什么"
     category: "discover"
@@ -82,7 +83,7 @@ frameworks:
     era: "1930 年代起"
     reference: "Taiichi Ohno《Toyota Production System》"
     x: 15
-    y: 82
+    y_pct: 82
   - index: "06"
     title: "How Might We"
     category: "discover"
@@ -93,7 +94,7 @@ frameworks:
     era: "1990 年代至 2000 年代广泛使用"
     reference: "IDEO.org Design Kit；How Might We 方法说明"
     x: 26
-    y: 52
+    y_pct: 52
   - index: "07"
     title: "价值主张画布"
     category: "plan"
@@ -104,7 +105,7 @@ frameworks:
     era: "2014 年"
     reference: "Osterwalder 等《Value Proposition Design》"
     x: 32
-    y: 28
+    y_pct: 28
   - index: "08"
     title: "故事地图"
     category: "plan"
@@ -115,7 +116,7 @@ frameworks:
     era: "2005 年前后提出，2014 年系统化"
     reference: "Jeff Patton《User Story Mapping》"
     x: 38
-    y: 68
+    y_pct: 68
   - index: "09"
     title: "服务蓝图"
     category: "plan"
@@ -126,7 +127,7 @@ frameworks:
     era: "1984 年"
     reference: "G. Lynn Shostack《Designing Services That Deliver》"
     x: 42
-    y: 42
+    y_pct: 42
   - index: "10"
     title: "RICE"
     category: "plan"
@@ -137,7 +138,7 @@ frameworks:
     era: "2010 年代中后期"
     reference: "Intercom《RICE: Simple prioritization for product managers》"
     x: 35
-    y: 14
+    y_pct: 14
   - index: "11"
     title: "Kano 模型"
     category: "plan"
@@ -148,7 +149,7 @@ frameworks:
     era: "1984 年"
     reference: "Noriaki Kano 等《Attractive Quality and Must-Be Quality》"
     x: 44
-    y: 84
+    y_pct: 84
   - index: "12"
     title: "MoSCoW"
     category: "plan"
@@ -159,7 +160,7 @@ frameworks:
     era: "1994 年"
     reference: "DSDM / Agile Business Consortium 的 MoSCoW 方法说明"
     x: 30
-    y: 55
+    y_pct: 55
   - index: "13"
     title: "领域驱动设计"
     category: "design"
@@ -170,7 +171,7 @@ frameworks:
     era: "2003 年"
     reference: "Eric Evans《Domain-Driven Design》"
     x: 52
-    y: 32
+    y_pct: 32
   - index: "14"
     title: "C4 模型"
     category: "design"
@@ -180,8 +181,9 @@ frameworks:
     suitable_for: "架构表达、技术沟通、系统拆解与对齐"
     era: "2011 年"
     reference: "Simon Brown《The C4 Model for Visualising Software Architecture》"
+    reference_url: "https://c4model.com/"
     x: 58
-    y: 18
+    y_pct: 18
   - index: "15"
     title: "事件风暴"
     category: "design"
@@ -192,7 +194,7 @@ frameworks:
     era: "2013 年"
     reference: "Alberto Brandolini《Introducing EventStorming》"
     x: 50
-    y: 58
+    y_pct: 58
   - index: "16"
     title: "低保真原型"
     category: "validate"
@@ -203,7 +205,7 @@ frameworks:
     era: "2003 年前后在 UX 领域系统化"
     reference: "Carolyn Snyder《Paper Prototyping》"
     x: 66
-    y: 46
+    y_pct: 46
   - index: "17"
     title: "可用性测试"
     category: "validate"
@@ -214,7 +216,7 @@ frameworks:
     era: "1993 年前后"
     reference: "Jakob Nielsen《Usability Engineering》"
     x: 72
-    y: 72
+    y_pct: 72
   - index: "18"
     title: "A/B 测试"
     category: "validate"
@@ -225,7 +227,7 @@ frameworks:
     era: "1920 年代起源，2000 年代在互联网产品中普及"
     reference: "Ron Kohavi 等《Trustworthy Online Controlled Experiments》"
     x: 64
-    y: 24
+    y_pct: 24
   - index: "19"
     title: "PRD"
     category: "deliver"
@@ -236,7 +238,7 @@ frameworks:
     era: "1990 年代至今"
     reference: "产品需求文档 PRD 通用写作实践"
     x: 78
-    y: 38
+    y_pct: 38
   - index: "20"
     title: "里程碑计划"
     category: "deliver"
@@ -247,7 +249,7 @@ frameworks:
     era: "长期项目管理方法，现代体系见 PMBOK"
     reference: "PMI《PMBOK Guide》"
     x: 92
-    y: 16
+    y_pct: 16
   - index: "21"
     title: "Scrum"
     category: "deliver"
@@ -258,7 +260,7 @@ frameworks:
     era: "1995 年"
     reference: "Ken Schwaber / Jeff Sutherland《The Scrum Guide》"
     x: 84
-    y: 55
+    y_pct: 55
   - index: "22"
     title: "上线复盘"
     category: "deliver"
@@ -269,7 +271,7 @@ frameworks:
     era: "2001 年前后在敏捷团队中系统化"
     reference: "Norm Kerth《Project Retrospectives》"
     x: 90
-    y: 78
+    y_pct: 78
   - index: "23"
     title: "北极星指标"
     category: "deliver"
@@ -280,7 +282,7 @@ frameworks:
     era: "2010 年代"
     reference: "Amplitude 北极星指标相关文章"
     x: 76
-    y: 12
+    y_pct: 12
   - index: "24"
     title: "OKR"
     category: "deliver"
@@ -291,7 +293,7 @@ frameworks:
     era: "1970 年代提出，1999 年后广泛传播"
     reference: "John Doerr《Measure What Matters》"
     x: 82
-    y: 86
+    y_pct: 86
   - index: "25"
     title: "影响地图"
     category: "deliver"
@@ -302,7 +304,7 @@ frameworks:
     era: "2012 年"
     reference: "Gojko Adzic《Impact Mapping》"
     x: 88
-    y: 42
+    y_pct: 42
   - index: "26"
     title: "风险清单"
     category: "deliver"
@@ -313,7 +315,7 @@ frameworks:
     era: "长期项目管理方法，现代体系见 PMBOK"
     reference: "PMI《PMBOK Guide》"
     x: 94
-    y: 62
+    y_pct: 62
   - index: "27"
     title: "决策矩阵"
     category: "plan"
@@ -324,7 +326,7 @@ frameworks:
     era: "决策分析领域长期使用，产品与工程团队在 2010 年代广泛采纳"
     reference: "Pugh Matrix；Kepner-Tregoe Decision Analysis"
     x: 40
-    y: 22
+    y_pct: 22
   - index: "28"
     title: "技术方案文档"
     category: "design"
@@ -335,7 +337,7 @@ frameworks:
     era: "2010 年代在大型工程组织中系统化"
     reference: "Google Design Docs；ADR (Architecture Decision Records)"
     x: 56
-    y: 82
+    y_pct: 82
   - index: "29"
     title: "RAPID"
     category: "deliver"
@@ -346,5 +348,173 @@ frameworks:
     era: "2000 年代由 Bain 提出并推广"
     reference: "Bain & Company《RAPID: An Approach to Better Decision Making》"
     x: 85
-    y: 32
+    y_pct: 32
+  - index: "30"
+    title: "质量属性场景"
+    category: "design"
+    category_name: "设计"
+    summary: "把性能、可用性、安全性、可维护性等抽象诉求写成可验证场景，让架构设计先回答为什么需要这样设计。"
+    proposer: "Software Engineering Institute / Len Bass、Paul Clements、Rick Kazman"
+    suitable_for: "非功能需求澄清、架构约束定义、设计理由说明、验收标准建立"
+    era: "1990 年代末至 2000 年代在软件架构实践中系统化"
+    reference: "Bass、Clements、Kazman《Software Architecture in Practice》"
+    reference_url: "https://www.sei.cmu.edu/library/applicability-of-general-scenarios-to-the-architecture-tradeoff-analysis-method/"
+    x: 48
+    y_pct: 12
+  - index: "31"
+    title: "ATAM"
+    category: "design"
+    category_name: "设计"
+    summary: "用场景和质量属性分析架构取舍，识别风险点、敏感点和权衡点，适合解释一个架构为什么值得采用。"
+    proposer: "Rick Kazman / Mark Klein / Paul Clements"
+    suitable_for: "架构评审、技术风险识别、方案取舍、复杂系统设计复盘"
+    era: "2000 年前后由 SEI 系统化提出"
+    reference: "Kazman、Klein、Clements《ATAM: Method for Architecture Evaluation》"
+    reference_url: "https://www.sei.cmu.edu/library/the-architecture-tradeoff-analysis-method/"
+    x: 62
+    y_pct: 30
+  - index: "32"
+    title: "4+1 视图模型"
+    category: "design"
+    category_name: "设计"
+    summary: "用逻辑、开发、进程、物理和场景五个视角描述系统，避免架构图只展示模块却解释不了运行和部署。"
+    proposer: "Philippe Kruchten"
+    suitable_for: "复杂系统架构表达、多视角沟通、研发与运维对齐、架构文档组织"
+    era: "1995 年"
+    reference: "Philippe Kruchten《The 4+1 View Model of Architecture》"
+    reference_url: "https://www.cs.ubc.ca/~gregor/teaching/papers/4+1view-architecture.pdf"
+    x: 68
+    y_pct: 48
+  - index: "33"
+    title: "架构决策记录"
+    category: "design"
+    category_name: "设计"
+    summary: "把关键架构决策、上下文、备选方案和后果记录下来，让后来者理解当时为什么做这个选择。"
+    proposer: "Michael Nygard（在轻量级 ADR 实践中广泛传播）"
+    suitable_for: "架构决策沉淀、技术债解释、团队交接、历史约束追溯"
+    era: "2011 年前后在敏捷架构实践中流行"
+    reference: "Michael Nygard《Documenting Architecture Decisions》"
+    reference_url: "https://adr.github.io/"
+    x: 60
+    y_pct: 66
+  - index: "34"
+    title: "arc42"
+    category: "design"
+    category_name: "设计"
+    summary: "用固定章节组织架构背景、约束、构建块、运行时、部署、质量需求和风险，适合系统化写架构设计。"
+    proposer: "Gernot Starke / Peter Hruschka"
+    suitable_for: "架构文档模板、设计评审、知识传承、复杂系统说明"
+    era: "2005 年前后提出并持续演进"
+    reference: "arc42 Architecture Documentation Template"
+    reference_url: "https://arc42.org/overview"
+    x: 72
+    y_pct: 78
+  - index: "35"
+    title: "康威定律"
+    category: "design"
+    category_name: "设计"
+    summary: "提醒架构边界会受到组织沟通结构影响，设计系统时也要同时设计团队边界、接口和协作方式。"
+    proposer: "Melvin Conway"
+    suitable_for: "组织架构与系统架构对齐、服务边界划分、团队拓扑设计、平台化演进"
+    era: "1968 年提出，微服务与 Team Topologies 实践中重新流行"
+    reference: "Melvin Conway《How Do Committees Invent?》；Skelton、Pais《Team Topologies》"
+    reference_url: "https://www.melconway.com/Home/Committees_Paper.html"
+    x: 54
+    y_pct: 90
+  - index: "36"
+    title: "双钻模型"
+    category: "plan"
+    category_name: "规划"
+    summary: "用发现、定义、发展、交付四个阶段组织发散与收敛，帮助团队从模糊机会走向清晰方案。"
+    proposer: "英国 Design Council"
+    suitable_for: "问题探索、机会定义、方案发散、设计流程组织"
+    era: "2004 年由 Design Council 系统化提出"
+    reference: "Design Council《The Double Diamond》"
+    reference_url: "https://www.designcouncil.org.uk/resources/framework-for-innovation/"
+    x: 34
+    y_pct: 42
+  - index: "37"
+    title: "设计思维"
+    category: "discover"
+    category_name: "发现"
+    summary: "围绕同理、定义、创意、原型和测试推进创新，把人的真实需求放在方案形成之前。"
+    proposer: "IDEO / Stanford d.school 等设计实践共同推广"
+    suitable_for: "创新探索、跨职能共创、用户问题定义、早期方案生成"
+    era: "1990 年代由 IDEO 等机构普及，2000 年代后广泛传播"
+    reference: "IDEO Design Thinking；Stanford d.school Design Thinking Bootleg"
+    reference_url: "https://www.interaction-design.org/literature/topics/design-thinking"
+    x: 24
+    y_pct: 34
+  - index: "38"
+    title: "机会解决方案树"
+    category: "plan"
+    category_name: "规划"
+    summary: "从结果指标向下拆出机会、解决方案和实验，让产品探索围绕可验证机会展开。"
+    proposer: "Teresa Torres"
+    suitable_for: "连续发现、机会空间整理、方案选择、实验规划"
+    era: "2021 年随《Continuous Discovery Habits》系统化传播"
+    reference: "Teresa Torres《Continuous Discovery Habits》"
+    reference_url: "https://www.producttalk.org/glossary-discovery-opportunity-solution-tree/"
+    x: 46
+    y_pct: 58
+  - index: "39"
+    title: "精益创业"
+    category: "validate"
+    category_name: "验证"
+    summary: "用构建、测量、学习循环验证商业和产品假设，尽早决定坚持、调整或放弃。"
+    proposer: "Eric Ries"
+    suitable_for: "MVP 验证、商业假设测试、早期产品迭代、方向调整"
+    era: "2011 年系统化出版并广泛传播"
+    reference: "Eric Ries《The Lean Startup》"
+    reference_url: "https://theleanstartup.com/principles"
+    x: 70
+    y_pct: 38
+  - index: "40"
+    title: "假设映射"
+    category: "validate"
+    category_name: "验证"
+    summary: "把方案背后的关键假设按重要性和证据强弱排序，优先验证最危险的未知。"
+    proposer: "精益产品与设计冲刺实践中常用，David Bland 等系统化传播"
+    suitable_for: "风险识别、实验优先级、MVP 范围收敛、方案验证"
+    era: "2010 年代在精益创业和产品发现实践中普及"
+    reference: "David J. Bland、Alexander Osterwalder《Testing Business Ideas》"
+    reference_url: "https://www.strategyzer.com/library/testing-business-ideas"
+    x: 76
+    y_pct: 58
+  - index: "41"
+    title: "HEART"
+    category: "validate"
+    category_name: "验证"
+    summary: "用幸福感、参与度、采用率、留存和任务成功五类指标衡量用户体验质量。"
+    proposer: "Kerry Rodden / Hilary Hutchinson / Xin Fu（Google）"
+    suitable_for: "体验指标体系、功能效果评估、用户体验质量追踪、实验指标设计"
+    era: "2010 年在 Google 研究论文中提出"
+    reference: "Rodden、Hutchinson、Fu《Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications》"
+    reference_url: "https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/"
+    x: 68
+    y_pct: 86
+  - index: "42"
+    title: "AARRR"
+    category: "deliver"
+    category_name: "交付与增长"
+    summary: "用获客、激活、留存、收入和推荐拆解增长漏斗，帮助团队定位增长瓶颈。"
+    proposer: "Dave McClure"
+    suitable_for: "增长分析、漏斗诊断、产品运营、指标拆解"
+    era: "2007 年前后由 Dave McClure 推广"
+    reference: "Dave McClure《Startup Metrics for Pirates》"
+    reference_url: "https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version"
+    x: 96
+    y_pct: 26
+  - index: "43"
+    title: "属性驱动设计"
+    category: "design"
+    category_name: "设计"
+    summary: "从架构驱动因素和质量属性出发逐层分解系统，用设计概念解释每个模块和边界的来源。"
+    proposer: "Software Engineering Institute / Humberto Cervantes / Rick Kazman 等"
+    suitable_for: "系统架构设计、质量属性驱动分解、模块边界设计、架构方案形成"
+    era: "2000 年代由 SEI 系统化发展，ADD 3.0 在 2010 年代完善"
+    reference: "Cervantes、Kazman《Designing Software Architectures: A Practical Approach》"
+    reference_url: "https://www.sei.cmu.edu/library/attribute-driven-design-create-software-architectures-using-architecturally-significant-requirements/"
+    x: 66
+    y_pct: 14
 ---

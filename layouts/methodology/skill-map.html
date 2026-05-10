@@ -38,8 +38,12 @@
           </button>
         {{ end }}
       </div>
+      <label class="framework-search">
+        <span>搜索方法</span>
+        <input id="framework-search-input" type="search" placeholder="输入方法、场景或来源" autocomplete="off">
+      </label>
       <div class="framework-toolbar-meta">
-        <span>{{ len .Params.frameworks }} 个框架</span>
+        <span id="framework-visible-count">{{ len .Params.frameworks }}</span><span> / {{ len .Params.frameworks }} 个框架</span>
       </div>
     </div>
   </section>
@@ -74,14 +78,84 @@
           data-suitable-for="{{ .suitable_for }}"
           data-era="{{ .era }}"
           data-reference="{{ .reference }}"
+          data-reference-url="{{ .reference_url }}"
           data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
           data-x="{{ .x }}"
-          data-y="{{ .y }}"
+          data-y="{{ .y_pct }}"
           aria-label="{{ .title }}"
         >
           <span class="framework-point-tooltip">{{ .title }}</span>
         </button>
       {{ end }}
+    </div>
+  </section>
+
+  <section class="framework-architecture-section">
+    <div class="framework-architecture-inner">
+      <div class="framework-architecture-copy">
+        <p class="framework-section-kicker">Architecture Path</p>
+        <h2>系统架构设计不是从技术选型开始，而是从设计理由开始。</h2>
+        <p>先把业务目标、质量属性和约束讲清楚，再形成结构、验证权衡、记录决策。这样团队看到的不是一张静态架构图，而是一条可以被复盘和演进的设计链路。</p>
+      </div>
+      <div class="framework-architecture-steps">
+        {{ $architectureSteps := slice
+          (dict "id" "30" "label" "01" "title" "质量属性场景" "body" "把性能、可用性、安全性、可维护性写成可验证场景。")
+          (dict "id" "43" "label" "02" "title" "属性驱动设计" "body" "用质量属性和约束驱动模块拆分，而不是先画组件。")
+          (dict "id" "14" "label" "03" "title" "C4 模型" "body" "从上下文到容器、组件、代码层层表达系统结构。")
+          (dict "id" "32" "label" "04" "title" "4+1 视图模型" "body" "补齐逻辑、开发、进程、物理和场景视角。")
+          (dict "id" "31" "label" "05" "title" "ATAM" "body" "检查关键权衡、敏感点和风险点是否成立。")
+          (dict "id" "33" "label" "06" "title" "架构决策记录" "body" "把上下文、备选方案、决定和后果沉淀下来。")
+        }}
+        {{ range $architectureSteps }}
+          <a class="framework-architecture-step" href="{{ printf "%s?id=%s" $detailPath .id }}">
+            <span>{{ .label }}</span>
+            <strong>{{ .title }}</strong>
+            <em>{{ .body }}</em>
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="framework-problem-section">
+    <div class="framework-problem-inner">
+      <div class="framework-problem-head">
+        <p class="framework-section-kicker">Problem Playbook</p>
+        <h2>先判断问题类型，再选择方法。</h2>
+        <p>这张地图不是为了收藏概念，而是训练你形成稳定的拆解动作：看清问题、拆出约束、提出假设、验证判断、沉淀复盘。每次遇到复杂问题，都先把它放进一个问题类型里。</p>
+      </div>
+      <div class="framework-problem-grid">
+        {{ $problemPaths := slice
+          (dict "title" "我不知道真正的问题是什么" "example" "用户说想要一个功能，但你不确定背后的动机、场景和阻力。" "methods" (slice "用户访谈" "JTBD" "五个为什么" "How Might We") "gain" "训练你从表面需求回到真实目标。")
+          (dict "title" "方案很多，但不知道怎么取舍" "example" "团队同时提出多个方向，争论很久却没有统一的评价标准。" "methods" (slice "决策矩阵" "RICE" "Kano 模型" "MoSCoW") "gain" "训练你把感觉判断变成可复盘的决策标准。")
+          (dict "title" "业务复杂，系统不知道怎么拆" "example" "一个需求牵涉多个服务、角色、数据流和质量要求，单靠架构图讲不清楚。" "methods" (slice "质量属性场景" "属性驱动设计" "C4 模型" "ATAM" "架构决策记录") "gain" "训练你解释设计理由，而不是只展示最终结构。")
+          (dict "title" "方向不确定，担心做完才发现错了" "example" "你有一个想法，但不知道用户是否需要、指标是否会变化、关键假设是否成立。" "methods" (slice "假设映射" "低保真原型" "精益创业" "A/B 测试" "HEART") "gain" "训练你用证据降低不确定性，而不是用投入证明自己。")
+          (dict "title" "交付推进混乱，责任和节奏不清" "example" "目标已经明确，但跨团队协作、版本边界、依赖风险和决策责任不断卡住。" "methods" (slice "PRD" "里程碑计划" "风险清单" "RAPID" "上线复盘") "gain" "训练你把复杂协作拆成责任、节奏和反馈闭环。")
+        }}
+        {{ range $problemPaths }}
+          <article class="framework-problem-card">
+            <h3>{{ .title }}</h3>
+            <p>{{ .example }}</p>
+            <div class="framework-problem-methods">
+              {{ range .methods }}
+                {{ $methodTitle := . }}
+                {{ $methodIndex := "" }}
+                {{ range $.Params.frameworks }}
+                  {{ if eq .title $methodTitle }}
+                    {{ $methodIndex = .index }}
+                  {{ end }}
+                {{ end }}
+                {{ if $methodIndex }}
+                  <a href="{{ printf "%s?id=%s" $detailPath $methodIndex }}">{{ $methodTitle }}</a>
+                {{ else }}
+                  <span>{{ $methodTitle }}</span>
+                {{ end }}
+              {{ end }}
+            </div>
+            <strong>{{ .gain }}</strong>
+          </article>
+        {{ end }}
+      </div>
     </div>
   </section>
 
@@ -102,6 +176,7 @@
             data-suitable-for="{{ .suitable_for }}"
             data-era="{{ .era }}"
             data-reference="{{ .reference }}"
+            data-reference-url="{{ .reference_url }}"
             data-detail-url="{{ printf "%s?id=%s" $detailPath .index }}"
             tabindex="0"
           >
@@ -153,6 +228,8 @@
       const filters = Array.from(document.querySelectorAll("[data-filter]"));
       const cards = Array.from(document.querySelectorAll("[data-framework-card]"));
       const points = Array.from(document.querySelectorAll("[data-framework-target]"));
+      const searchInput = document.getElementById("framework-search-input");
+      const visibleCount = document.getElementById("framework-visible-count");
       const canvasShell = document.querySelector(".framework-canvas-shell");
       const connectionsSvg = document.getElementById("framework-connections");
       const cardLayout = document.getElementById("framework-card-layout");
@@ -245,7 +322,17 @@
         popupProposer.textContent = source.dataset.proposer || "";
         popupSuitable.textContent = source.dataset.suitableFor || "";
         popupEra.textContent = source.dataset.era || "";
-        popupReference.textContent = source.dataset.reference || "";
+        if (source.dataset.referenceUrl) {
+          popupReference.textContent = "";
+          const referenceLink = document.createElement("a");
+          referenceLink.href = source.dataset.referenceUrl;
+          referenceLink.target = "_blank";
+          referenceLink.rel = "noopener noreferrer";
+          referenceLink.textContent = source.dataset.reference || "查看来源";
+          popupReference.appendChild(referenceLink);
+        } else {
+          popupReference.textContent = source.dataset.reference || "";
+        }
         if (popupLink) {
           popupLink.href = source.dataset.detailUrl || "#";
         }
@@ -287,26 +374,53 @@
         });
       }
 
-      function setFilter(filter) {
+      let activeFilter = "all";
+      let activeQuery = "";
+
+      function getSearchText(source) {
+        return [
+          source.dataset.title,
+          source.dataset.summary,
+          source.dataset.categoryName,
+          source.dataset.proposer,
+          source.dataset.suitableFor,
+          source.dataset.reference,
+          source.dataset.referenceUrl
+        ].join(" ").toLowerCase();
+      }
+
+      function matchesCurrentView(source) {
+        const matchesFilter = activeFilter === "all" || source.dataset.category === activeFilter;
+        const matchesQuery = !activeQuery || getSearchText(source).indexOf(activeQuery) !== -1;
+        return matchesFilter && matchesQuery;
+      }
+
+      function applyFilters() {
         filters.forEach(function (button) {
-          button.classList.toggle("is-active", button.dataset.filter === filter);
+          button.classList.toggle("is-active", button.dataset.filter === activeFilter);
         });
 
+        let count = 0;
         cards.forEach(function (card) {
-          const visible = filter === "all" || card.dataset.category === filter;
+          const visible = matchesCurrentView(card);
           card.classList.toggle("is-hidden", !visible);
+          if (visible) count += 1;
         });
 
         points.forEach(function (point) {
-          const visible = filter === "all" || point.dataset.category === filter;
+          const visible = matchesCurrentView(point);
           point.classList.toggle("is-hidden", !visible);
         });
+
+        if (visibleCount) {
+          visibleCount.textContent = String(count);
+        }
 
         drawConnections();
 
         if (activeFramework) {
-          const activeStillVisible = filter === "all" || points.some(function (point) {
-            return point.dataset.index === activeFramework && point.dataset.category === filter;
+          const activeStillVisible = points.some(function (point) {
+            return point.dataset.index === activeFramework && matchesCurrentView(point);
           });
 
           if (!activeStillVisible) {
@@ -317,9 +431,17 @@
 
       filters.forEach(function (button) {
         button.addEventListener("click", function () {
-          setFilter(button.dataset.filter);
+          activeFilter = button.dataset.filter;
+          applyFilters();
         });
       });
+
+      if (searchInput) {
+        searchInput.addEventListener("input", function () {
+          activeQuery = searchInput.value.trim().toLowerCase();
+          applyFilters();
+        });
+      }
 
       points.forEach(function (point) {
         point.addEventListener("click", function () {
