@@ -8,12 +8,24 @@
     {{ with .Params.description }}<meta name="description" content="{{ . }}">{{ else }}{{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}{{ end }}
     <meta name="generator" content="Hugo {{ hugo.Version }}">
     <meta name="robots" content="index, follow">
+    <meta name="color-scheme" content="light dark">
+    <script>
+      (function () {
+        var theme;
+        try { theme = localStorage.getItem('theme'); } catch (e) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ "/ananke/css/main.min.d05fb5f317fcf33b3a52936399bdf6f47dc776516e1692e412ec7d76f4a5faa2.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+    <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
 
     {{ block "extra_head" . }}{{ end }}
   </head>
@@ -40,5 +52,38 @@
         </div>
       </footer>
     {{ end }}
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var media = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function storedTheme() {
+          try { return localStorage.getItem('theme'); } catch (e) { return null; }
+        }
+
+        function applyTheme(theme) {
+          root.setAttribute('data-theme', theme);
+          var frame = document.querySelector('iframe.giscus-frame');
+          if (frame) {
+            frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+          }
+        }
+
+        document.querySelectorAll('.theme-toggle').forEach(function (button) {
+          button.addEventListener('click', function () {
+            var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            applyTheme(next);
+          });
+        });
+
+        media.addEventListener('change', function (event) {
+          if (!storedTheme()) {
+            applyTheme(event.matches ? 'dark' : 'light');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

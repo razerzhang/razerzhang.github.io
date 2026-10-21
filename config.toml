@@ -16,7 +16,7 @@ publishDir = "docs"
     style = "github"
     lineNos = false
     guessSyntax = true
-    noClasses = true
+    noClasses = false
 
 [params]
   author = "Runzhe Zhang"
