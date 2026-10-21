@@ -10,6 +10,10 @@
       <a href="{{ relLangURL "methodology/" }}" class="f5 fw4 no-underline nav-link mr3 mr4-ns">方法论</a>
       <a href="{{ relLangURL "search/" }}" class="f5 fw4 no-underline nav-link mr3 mr4-ns">搜索</a>
       <a href="{{ printf "%s#contact" $home }}" class="f5 fw4 no-underline nav-link">联系</a>
+      <button type="button" class="theme-toggle ml3 ml4-ns" aria-label="切换深色模式" title="切换深色模式">
+        <span class="theme-toggle-icon theme-toggle-moon">{{ partial "icons/moon.html" . }}</span>
+        <span class="theme-toggle-icon theme-toggle-sun">{{ partial "icons/sun.html" . }}</span>
+      </button>
     </div>
   </div>
 </nav>

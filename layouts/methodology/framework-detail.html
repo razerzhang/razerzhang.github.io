@@ -4,7 +4,13 @@
     <div class="framework-detail-header-inner">
       <a href="{{ $mapPage.RelPermalink }}" class="framework-detail-back">← 返回框架地图</a>
       <a href="{{ "/" | relURL }}" class="framework-detail-wordmark">Razer Zhang</a>
-      <span class="framework-detail-badge" id="framework-detail-badge">#01 · 方法论</span>
+      <div class="framework-detail-header-actions">
+        <span class="framework-detail-badge" id="framework-detail-badge">#01 · 方法论</span>
+        <button type="button" class="theme-toggle" aria-label="切换深色模式" title="切换深色模式">
+          <span class="theme-toggle-icon theme-toggle-moon">{{ partial "icons/moon.html" . }}</span>
+          <span class="theme-toggle-icon theme-toggle-sun">{{ partial "icons/sun.html" . }}</span>
+        </button>
+      </div>
     </div>
   </header>
 {{ end }}
