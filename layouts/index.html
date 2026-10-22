@@ -54,7 +54,7 @@
             <p class="module-card-count">{{ len $projects }} project{{ if ne (len $projects) 1 }}s{{ end }}</p>
           </div>
           <h3>我的项目</h3>
-          <p class="module-card-body">正在打磨的项目，以及我在开源社区的贡献。</p>
+          <p class="module-card-body">我在 GitHub 开源社区贡献的功能。</p>
           <div class="module-card-preview">
             {{ range first 2 $projects.ByWeight }}
               <span>{{ .Title }}</span>
